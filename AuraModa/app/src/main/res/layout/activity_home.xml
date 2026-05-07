@@ -5,28 +5,36 @@
     android:background="@color/black_primary"
     android:orientation="vertical">
 
+    <!-- Topbar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:background="@color/black_primary">
 
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/logo_auramoda"
+            android:scaleType="fitCenter"
+            android:layout_marginEnd="8dp"/>
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="AM"
+            android:text="AuraModa"
             android:textColor="@color/gold"
             android:textSize="18sp"
-            android:letterSpacing="0.2"/>
+            android:letterSpacing="0.1"/>
 
         <TextView
             android:id="@+id/tvUserAvatar"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:text="F"
             android:textColor="@color/white_primary"
             android:textSize="16sp"
@@ -35,6 +43,7 @@
 
     </LinearLayout>
 
+    <!-- Contenido scrollable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -46,11 +55,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Saludo -->
             <TextView
                 android:id="@+id/tvSaludo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hola, Flor"
+                android:text="Buenas noches, Flor!"
                 android:textColor="@color/gray_muted"
                 android:textSize="13sp"
                 android:layout_marginBottom="4dp"/>
@@ -58,11 +68,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Tu estilo de hoy empieza aquí?"
+                android:text="Inspirate, crea tu look"
                 android:textColor="@color/white_primary"
                 android:textSize="22sp"
                 android:layout_marginBottom="20dp"/>
 
+            <!-- Card outfit del dia -->
             <LinearLayout
                 android:id="@+id/cardIA"
                 android:layout_width="match_parent"
@@ -75,25 +86,26 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="RECOMENDADO IA"
+                    android:text="OUTFIT DEL DIA"
                     android:textColor="#DDD6FE"
                     android:textSize="10sp"
                     android:letterSpacing="0.2"
                     android:layout_marginBottom="6dp"/>
 
                 <TextView
+                    android:id="@+id/tvOutfitIA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Casual elegante"
+                    android:text="Cargando recomendacion..."
                     android:textColor="@color/white_primary"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:layout_marginBottom="12dp"/>
 
                 <TextView
                     android:id="@+id/btnVerOutfit"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="Ver outfit"
+                    android:text="Chatear con IA"
                     android:textColor="@color/white_primary"
                     android:textSize="12sp"
                     android:gravity="center"
@@ -102,6 +114,31 @@
                     android:background="@drawable/bg_btn_outline_white"/>
 
             </LinearLayout>
+
+            <!-- Tus estilos -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tus estilos"
+                android:textColor="@color/white_primary"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:id="@+id/layoutEstilos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Quick cards -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Explorar"
+                android:textColor="@color/white_primary"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,7 +149,7 @@
                 <LinearLayout
                     android:id="@+id/cardGaleria"
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
+                    android:layout_height="90dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -122,9 +159,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Galería"
+                        android:text="Galeria"
                         android:textColor="@color/gold"
-                        android:textSize="13sp"/>
+                        android:textSize="13sp"
+                        android:layout_marginBottom="4dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -138,7 +176,7 @@
                 <LinearLayout
                     android:id="@+id/cardFavoritos"
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
+                    android:layout_height="90dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -147,8 +185,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="&#9829;"
+                        android:textSize="22sp"
+                        android:textColor="@color/purple"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Favoritos"
-                        android:textColor="@color/rose"
+                        android:textColor="@color/purple"
                         android:textSize="13sp"/>
 
                     <TextView
@@ -162,10 +208,58 @@
 
             </LinearLayout>
 
+            <!-- Card perfil -->
+            <LinearLayout
+                android:id="@+id/cardPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_card_gold"
+                android:padding="16dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/tvAvatarPerfil"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:text="F"
+                    android:textColor="@color/white_primary"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_avatar"
+                    android:layout_marginEnd="14dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNombrePerfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Flor"
+                        android:textColor="@color/white_primary"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver perfil"
+                        android:textColor="@color/gold"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
 
+    <!-- Bottom nav -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -178,9 +272,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="⬤"
+            android:text="Casa"
             android:textColor="@color/gold"
-            android:textSize="10sp"
+            android:textSize="11sp"
             android:gravity="center"/>
 
         <TextView
@@ -188,9 +282,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="⬛"
-            android:textColor="@color/gray_dark"
-            android:textSize="10sp"
+            android:text="Galeria"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
             android:gravity="center"/>
 
         <TextView
@@ -198,9 +292,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="⬤"
-            android:textColor="@color/gray_dark"
-            android:textSize="10sp"
+            android:text="Chat IA"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
             android:gravity="center"/>
 
         <TextView
@@ -208,9 +302,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="⬤"
-            android:textColor="@color/gray_dark"
-            android:textSize="10sp"
+            android:text="Perfil"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
             android:gravity="center"/>
 
     </LinearLayout>

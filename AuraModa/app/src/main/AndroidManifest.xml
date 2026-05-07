@@ -25,6 +25,9 @@
         <activity android:name=".ui.onboarding.OnboardingActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".GaleriaActivity"/>
+        <activity android:name=".ChatActivity"/>
+        <activity android:name=".FavoritosActivity"/>
+        <activity android:name=".PerfilActivity"/>
 
     </application>
 
