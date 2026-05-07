@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_primary"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="32dp">
+
+        <!-- Logo -->
+        <View
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_logo_circle"/>
+
+        <!-- Nombre app -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AURAMODA"
+            android:textColor="@color/gold"
+            android:textSize="20sp"
+            android:letterSpacing="0.3"
+            android:layout_marginBottom="4dp"/>
+
+        <!-- Tagline -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tu estilista personal con IA"
+            android:textColor="@color/gray_muted"
+            android:textSize="12sp"
+            android:layout_marginBottom="48dp"/>
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Correo electrónico"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white_primary"
+            android:textColorHint="@color/gray_muted"
+            android:background="@drawable/bg_input"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Contraseña -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:textColor="@color/white_primary"
+            android:textColorHint="@color/gray_muted"
+            android:background="@drawable/bg_input_gold"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Olvidé contraseña -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Olvidé mi contraseña"
+            android:textColor="@color/purple"
+            android:textSize="12sp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Botón login -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Iniciar sesión"
+            android:textColor="@color/black_primary"
+            android:backgroundTint="@color/gold"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Divisor -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray_dark"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  o  "
+                android:textColor="@color/gray_muted"
+                android:textSize="12sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray_dark"/>
+        </LinearLayout>
+
+        <!-- Registro -->
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No tienes cuenta? Regístrate"
+            android:textColor="@color/purple"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+</ScrollView>

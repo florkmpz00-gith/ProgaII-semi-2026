@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_primary"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <!-- Progress dots -->
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp">
+
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="20dp"
+            android:layout_height="4dp"
+            android:background="@color/gold"
+            android:layout_marginEnd="6dp"/>
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="8dp"
+            android:layout_height="4dp"
+            android:background="@color/gray_dark"
+            android:layout_marginEnd="6dp"/>
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="8dp"
+            android:layout_height="4dp"
+            android:background="@color/gray_dark"/>
+
+    </LinearLayout>
+
+    <!-- Icono -->
+    <ImageView
+        android:id="@+id/ivOnboardingIcon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_logo_aurora"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Titulo -->
+    <TextView
+        android:id="@+id/tvOnboardingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Hola! ¿Cómo te llamas?"
+        android:textColor="@color/white_primary"
+        android:textSize="22sp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Subtitulo -->
+    <TextView
+        android:id="@+id/tvOnboardingSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Así te llamaré cuando entres a la app"
+        android:textColor="@color/gray_muted"
+        android:textSize="13sp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Input nombre paso 1 -->
+    <EditText
+        android:id="@+id/etOnboardingInput"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Tu nombre..."
+        android:textColor="@color/white_primary"
+        android:textColorHint="@color/gray_muted"
+        android:background="@drawable/bg_input_gold"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPersonName"/>
+
+    <!-- Chips edad paso 2 -->
+    <LinearLayout
+        android:id="@+id/layoutEdad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/chip1"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="15-20"
+            android:textColor="@color/gray_muted"
+            android:background="@drawable/bg_input"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center"
+            android:layout_marginEnd="6dp"/>
+
+        <TextView
+            android:id="@+id/chip2"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="21-27"
+            android:textColor="@color/gray_muted"
+            android:background="@drawable/bg_input"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center"
+            android:layout_marginEnd="6dp"/>
+
+        <TextView
+            android:id="@+id/chip3"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="28-35"
+            android:textColor="@color/gray_muted"
+            android:background="@drawable/bg_input"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center"
+            android:layout_marginEnd="6dp"/>
+
+        <TextView
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="36+"
+            android:textColor="@color/gray_muted"
+            android:background="@drawable/bg_input"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- Chips estilo paso 3 -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupEstilo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:singleSelection="false"
+        android:visibility="gone">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipCasual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casual"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipElegante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elegante"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipDeportivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deportivo"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipUrbano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Urbano"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipBohemio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bohemio"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Formal"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- Boton continuar -->
+    <Button
+        android:id="@+id/btnContinuar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Continuar"
+        android:textColor="@color/black_primary"
+        android:backgroundTint="@color/gold"/>
+
+</LinearLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_primary"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@color/black_primary">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Galería"
+            android:textColor="@color/white_primary"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <!-- Filtros -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/filterTodos"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Todos"
+                android:textColor="@color/black_primary"
+                android:textSize="12sp"
+                android:background="@drawable/bg_chip_active"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/filterCasual"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Casual"
+                android:textColor="@color/gray_muted"
+                android:textSize="12sp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/filterElegante"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Elegante"
+                android:textColor="@color/gray_muted"
+                android:textSize="12sp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/filterUrbano"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Urbano"
+                android:textColor="@color/gray_muted"
+                android:textSize="12sp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/filterFormal"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Formal"
+                android:textColor="@color/gray_muted"
+                android:textSize="12sp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Grid de imagenes -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGaleria"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"/>
+
+    <!-- Loading -->
+    <ProgressBar
+        android:id="@+id/progressGaleria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+</LinearLayout>
