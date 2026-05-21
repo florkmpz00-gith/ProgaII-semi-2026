@@ -43,12 +43,62 @@
 
     </LinearLayout>
 
+    <!-- Nav arriba -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="#111111">
+
+        <TextView
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Inicio"
+            android:textColor="@color/gold"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:background="@drawable/bg_nav_selected"/>
+
+        <TextView
+            android:id="@+id/navChat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Chat IA"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navTryOn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Try-On"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Perfil"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
     <!-- Contenido scrollable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="20dp">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,9 +121,141 @@
                 android:text="Inspirate, crea tu look"
                 android:textColor="@color/white_primary"
                 android:textSize="22sp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="16dp"/>
 
-            <!-- Card outfit del dia -->
+            <!-- Estilos -->
+            <LinearLayout
+                android:id="@+id/layoutEstilos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Cards: Galeria + Armario -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Explorar"
+                android:textColor="@color/white_primary"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:id="@+id/cardGaleria"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_gold"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Galería"
+                        android:textColor="@color/gold"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outfits de moda"
+                        android:textColor="@color/gray_muted"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cardArmario"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_purple">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mi Armario"
+                        android:textColor="#DDD6FE"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Combinaciones IA"
+                        android:textColor="@color/gray_muted"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Try On card -->
+            <LinearLayout
+                android:id="@+id/cardTryOn"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_card_rose"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Virtual Try-On"
+                        android:textColor="@color/purple"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Probate outfits con IA"
+                        android:textColor="@color/gray_muted"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="→"
+                    android:textColor="@color/purple"
+                    android:textSize="22sp"/>
+
+            </LinearLayout>
+
+            <!-- Outfit del dia -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hoy te recomiendo"
+                android:textColor="@color/white_primary"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
             <LinearLayout
                 android:id="@+id/cardIA"
                 android:layout_width="match_parent"
@@ -112,99 +294,6 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:background="@drawable/bg_btn_outline_white"/>
-
-            </LinearLayout>
-
-            <!-- Tus estilos -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tus estilos"
-                android:textColor="@color/white_primary"
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:id="@+id/layoutEstilos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- Quick cards -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Explorar"
-                android:textColor="@color/white_primary"
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
-
-                <LinearLayout
-                    android:id="@+id/cardGaleria"
-                    android:layout_width="0dp"
-                    android:layout_height="90dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/bg_card_gold"
-                    android:layout_marginEnd="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Galeria"
-                        android:textColor="@color/gold"
-                        android:textSize="13sp"
-                        android:layout_marginBottom="4dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pexels API"
-                        android:textColor="@color/gray_muted"
-                        android:textSize="10sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/cardFavoritos"
-                    android:layout_width="0dp"
-                    android:layout_height="90dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/bg_card_rose">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#9829;"
-                        android:textSize="22sp"
-                        android:textColor="@color/purple"
-                        android:layout_marginBottom="4dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Favoritos"
-                        android:textColor="@color/purple"
-                        android:textSize="13sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Guardados"
-                        android:textColor="@color/gray_muted"
-                        android:textSize="10sp"/>
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -258,55 +347,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-    <!-- Bottom nav -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:background="#111111"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Casa"
-            android:textColor="@color/gold"
-            android:textSize="11sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/navGaleria"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Galeria"
-            android:textColor="@color/gray_muted"
-            android:textSize="11sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/navChat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Chat IA"
-            android:textColor="@color/gray_muted"
-            android:textSize="11sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:textColor="@color/gray_muted"
-            android:textSize="11sp"
-            android:gravity="center"/>
-
-    </LinearLayout>
 
 </LinearLayout>

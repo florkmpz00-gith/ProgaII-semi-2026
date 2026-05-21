@@ -5,6 +5,56 @@
     android:background="@color/black_primary"
     android:orientation="vertical">
 
+    <!-- Nav -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="#111111">
+
+        <TextView
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Inicio"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navChat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Chat IA"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navTryOn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Try-On"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Perfil"
+            android:textColor="@color/gold"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:background="@drawable/bg_nav_selected"/>
+
+    </LinearLayout>
+
     <!-- Header morado -->
     <LinearLayout
         android:layout_width="match_parent"

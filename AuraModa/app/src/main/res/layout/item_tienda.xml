@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card_gold"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp">
+
+        <TextView
+            android:id="@+id/tvTiendaNombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gold"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvTiendaPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_primary"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTiendaDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_muted"
+        android:textSize="13sp"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/btnVisitar"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="Ver tienda →"
+        android:textColor="@color/white_primary"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/bg_btn_outline_white"/>
+
+</LinearLayout>

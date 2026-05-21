@@ -8,19 +8,35 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class PerfilActivity extends AppCompatActivity {
 
     TextView tvAvatar, tvNombre, tvFavCount, tvEdad, tvModoToggle;
     LinearLayout layoutEstilos, menuFavoritos, menuHistorial, menuModo, menuCerrar;
     DatabaseHelper db;
-    boolean modoOscuro = true;
     SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
+        findViewById(R.id.tvBack).setOnClickListener(v -> finish());
+
+        // Nav
+        findViewById(R.id.navHome).setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
+        findViewById(R.id.navChat).setOnClickListener(v -> {
+            startActivity(new Intent(this, ChatActivity.class));
+            finish();
+        });
+        findViewById(R.id.navTryOn).setOnClickListener(v -> {
+            startActivity(new Intent(this, TryOnActivity.class));
+            finish();
+        });
 
         db = new DatabaseHelper(this);
         prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
@@ -38,8 +54,6 @@ public class PerfilActivity extends AppCompatActivity {
         menuHistorial = findViewById(R.id.menuHistorial);
         menuModo = findViewById(R.id.menuModo);
         menuCerrar = findViewById(R.id.menuCerrar);
-
-        findViewById(R.id.tvBack).setOnClickListener(v -> finish());
 
         if (!nombre.isEmpty()) {
             tvAvatar.setText(String.valueOf(nombre.charAt(0)).toUpperCase());
@@ -70,18 +84,27 @@ public class PerfilActivity extends AppCompatActivity {
             }
         }
 
+        boolean modoOscuro = prefs.getBoolean("modo_oscuro", true);
+        tvModoToggle.setText(modoOscuro ? "ON" : "OFF");
+        tvModoToggle.setTextColor(modoOscuro ?
+                Color.parseColor("#C9A547") : Color.parseColor("#555555"));
+
+        menuModo.setOnClickListener(v -> {
+            boolean oscuroActual = prefs.getBoolean("modo_oscuro", true);
+            boolean nuevoModo = !oscuroActual;
+            prefs.edit().putBoolean("modo_oscuro", nuevoModo).apply();
+            tvModoToggle.setText(nuevoModo ? "ON" : "OFF");
+            tvModoToggle.setTextColor(nuevoModo ?
+                    Color.parseColor("#C9A547") : Color.parseColor("#555555"));
+            AppCompatDelegate.setDefaultNightMode(
+                    nuevoModo ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        });
+
         menuFavoritos.setOnClickListener(v ->
                 startActivity(new Intent(this, FavoritosActivity.class)));
 
         menuHistorial.setOnClickListener(v ->
                 startActivity(new Intent(this, FavoritosActivity.class)));
-
-        menuModo.setOnClickListener(v -> {
-            modoOscuro = !modoOscuro;
-            tvModoToggle.setText(modoOscuro ? "ON" : "OFF");
-            tvModoToggle.setTextColor(modoOscuro ?
-                    Color.parseColor("#C9A547") : Color.parseColor("#555555"));
-        });
 
         menuCerrar.setOnClickListener(v -> {
             prefs.edit()

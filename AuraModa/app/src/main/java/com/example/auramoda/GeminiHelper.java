@@ -14,8 +14,8 @@ import java.util.concurrent.Executors;
 
 public class GeminiHelper {
 
-    private static final String API_KEY = "AIzaSyCHGUi9x_1Guqq7NX6kDUwIg71S7Vrb6M4";
-    private static final String URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=";
+    private static final String API_KEY = "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";
+    private static final String URL_BASE = "https://api.groq.com/openai/v1/chat/completions";
 
     public interface GeminiCallback {
         void onRespuesta(String respuesta);
@@ -34,25 +34,28 @@ public class GeminiHelper {
                         "Responde de forma amigable, corta y practica sobre moda y outfits. " +
                         "Siempre da recomendaciones especificas de prendas.";
 
-                JSONObject textPart = new JSONObject();
-                textPart.put("text", contexto + "\n\nUsuario: " + prompt);
+                JSONObject systemMsg = new JSONObject();
+                systemMsg.put("role", "system");
+                systemMsg.put("content", contexto);
 
-                JSONArray parts = new JSONArray();
-                parts.put(textPart);
+                JSONObject userMsg = new JSONObject();
+                userMsg.put("role", "user");
+                userMsg.put("content", prompt);
 
-                JSONObject content = new JSONObject();
-                content.put("parts", parts);
-
-                JSONArray contents = new JSONArray();
-                contents.put(content);
+                JSONArray messages = new JSONArray();
+                messages.put(systemMsg);
+                messages.put(userMsg);
 
                 JSONObject body = new JSONObject();
-                body.put("contents", contents);
+                body.put("model", "llama-3.3-70b-versatile");
+                body.put("messages", messages);
+                body.put("max_tokens", 500);
 
-                URL url = new URL(URL_BASE + API_KEY);
+                URL url = new URL(URL_BASE);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("Authorization", "Bearer " + API_KEY);
                 conn.setDoOutput(true);
                 conn.setConnectTimeout(15000);
                 conn.setReadTimeout(15000);
@@ -74,6 +77,7 @@ public class GeminiHelper {
                         errorResponse.append(line);
                     }
                     reader.close();
+                    android.util.Log.e("GeminiHelper", "HTTP Error " + responseCode + ": " + errorResponse);
                     handler.post(() -> callback.onError("Error " + responseCode + ": " + errorResponse));
                     return;
                 }
@@ -86,17 +90,16 @@ public class GeminiHelper {
                 reader.close();
 
                 JSONObject json = new JSONObject(response.toString());
-                String respuesta = json.getJSONArray("candidates")
+                String respuesta = json.getJSONArray("choices")
                         .getJSONObject(0)
-                        .getJSONObject("content")
-                        .getJSONArray("parts")
-                        .getJSONObject(0)
-                        .getString("text");
+                        .getJSONObject("message")
+                        .getString("content");
 
                 handler.post(() -> callback.onRespuesta(respuesta));
 
             } catch (Exception e) {
-                handler.post(() -> callback.onError(e.getMessage()));
+                android.util.Log.e("GeminiHelper", "Excepcion: " + e.getMessage(), e);
+                handler.post(() -> callback.onError("Excepcion: " + e.getMessage()));
             }
         });
     }

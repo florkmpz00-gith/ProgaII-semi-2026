@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +24,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        findViewById(R.id.tvBack).setOnClickListener(v -> finish());
+
         SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
         userName = prefs.getString("user_name", "");
         userEstilos = prefs.getString("user_estilos", "casual");
@@ -37,7 +38,6 @@ public class ChatActivity extends AppCompatActivity {
         rvChat.setLayoutManager(new LinearLayoutManager(this));
         rvChat.setAdapter(adapter);
 
-        // Mensaje de bienvenida
         agregarMensajeIA("¡Hola " + userName + "! Soy tu estilista personal. ¿Para qué ocasión necesitas un outfit hoy?");
 
         btnEnviar.setOnClickListener(v -> {

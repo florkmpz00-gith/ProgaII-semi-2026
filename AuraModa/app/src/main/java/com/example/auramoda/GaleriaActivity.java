@@ -1,5 +1,6 @@
 package com.example.auramoda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -27,6 +28,8 @@ public class GaleriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
 
+        findViewById(R.id.tvBack).setOnClickListener(v -> finish());
+
         rvGaleria = findViewById(R.id.rvGaleria);
         progressGaleria = findViewById(R.id.progressGaleria);
         filterTodos = findViewById(R.id.filterTodos);
@@ -37,18 +40,51 @@ public class GaleriaActivity extends AppCompatActivity {
 
         rvGaleria.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new GaleriaAdapter(this, imageUrls, url -> {
-            Toast.makeText(this, "Guardado en favoritos!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, DetalleOutfitActivity.class);
+            intent.putExtra("image_url", url);
+            intent.putExtra("estilo", filtroActual);
+            startActivity(intent);
         });
         rvGaleria.setAdapter(adapter);
 
-        // Filtros
-        filterTodos.setOnClickListener(v -> buscar("fashion outfit"));
-        filterCasual.setOnClickListener(v -> buscar("casual outfit"));
-        filterElegante.setOnClickListener(v -> buscar("elegant fashion"));
-        filterUrbano.setOnClickListener(v -> buscar("urban style outfit"));
-        filterFormal.setOnClickListener(v -> buscar("formal wear fashion"));
+        filterTodos.setOnClickListener(v -> {
+            filtroActual = "fashion outfit";
+            actualizarFiltros(filterTodos);
+            buscar("woman fashion model outfit white background");
+        });
+        filterCasual.setOnClickListener(v -> {
+            filtroActual = "casual outfit";
+            actualizarFiltros(filterCasual);
+            buscar("woman casual style outfit lookbook");
+        });
+        filterElegante.setOnClickListener(v -> {
+            filtroActual = "elegant fashion";
+            actualizarFiltros(filterElegante);
+            buscar("woman elegant dress fashion model studio");
+        });
+        filterUrbano.setOnClickListener(v -> {
+            filtroActual = "urban style outfit";
+            actualizarFiltros(filterUrbano);
+            buscar("woman streetwear urban fashion lookbook");
+        });
+        filterFormal.setOnClickListener(v -> {
+            filtroActual = "formal wear fashion";
+            actualizarFiltros(filterFormal);
+            buscar("woman formal business outfit model");
+        });
 
-        buscar(filtroActual);
+        actualizarFiltros(filterTodos);
+        buscar("woman fashion model outfit white background");
+    }
+
+    void actualizarFiltros(TextView filtroActivo) {
+        TextView[] filtros = {filterTodos, filterCasual, filterElegante, filterUrbano, filterFormal};
+        for (TextView f : filtros) {
+            f.setBackgroundResource(R.drawable.bg_input);
+            f.setTextColor(getResources().getColor(R.color.gray_muted));
+        }
+        filtroActivo.setBackgroundResource(R.drawable.bg_chip_active);
+        filtroActivo.setTextColor(getResources().getColor(R.color.black_primary));
     }
 
     void buscar(String query) {

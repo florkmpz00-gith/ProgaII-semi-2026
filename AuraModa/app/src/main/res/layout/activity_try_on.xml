@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_primary"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@color/black_primary">
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="←"
+            android:textColor="@color/white_primary"
+            android:textSize="22sp"
+            android:layout_marginEnd="12dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Virtual Try-On"
+            android:textColor="@color/white_primary"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <!-- Nav -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="#111111">
+
+        <TextView
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Inicio"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navChat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Chat IA"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navTryOn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Try-On"
+            android:textColor="@color/gold"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:background="@drawable/bg_nav_selected"/>
+
+        <TextView
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Perfil"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sube tu foto y describí el outfit que querés probar"
+                android:textColor="@color/gray_muted"
+                android:textSize="13sp"
+                android:layout_marginBottom="16dp"/>
+
+            <ImageView
+                android:id="@+id/ivPersona"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_input"
+                android:src="@android:drawable/ic_menu_gallery"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/btnSubirPersona"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Subir mi foto"
+                android:textColor="@color/white_primary"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:background="@drawable/bg_btn_outline_white"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Qué outfit querés probar?"
+                android:textColor="@color/white_primary"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/etOutfit"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:hint="Ej: Vestido rojo floral con cinturón negro y sandalias beige"
+                android:textColor="@color/white_primary"
+                android:textColorHint="@color/gray_muted"
+                android:textSize="13sp"
+                android:background="@drawable/bg_input"
+                android:padding="12dp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gold"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp"/>
+
+            <ProgressBar
+                android:id="@+id/progressTryOn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:id="@+id/btnProcesar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Visualizar mi look con IA"
+                android:textColor="@color/white_primary"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:background="@drawable/bg_avatar"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:id="@+id/layoutResultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card_purple"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ANÁLISIS DE TU LOOK"
+                    android:textColor="#DDD6FE"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.2"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvResultado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white_primary"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

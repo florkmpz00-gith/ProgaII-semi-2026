@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"/>
 
     <application
         android:allowBackup="true"
@@ -24,10 +27,22 @@
         <activity android:name=".ui.auth.RegisterActivity"/>
         <activity android:name=".ui.onboarding.OnboardingActivity"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".GaleriaActivity"/>
-        <activity android:name=".ChatActivity"/>
-        <activity android:name=".FavoritosActivity"/>
-        <activity android:name=".PerfilActivity"/>
+        <activity android:name=".GaleriaActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ChatActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".FavoritosActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".PerfilActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".DetalleOutfitActivity"
+            android:parentActivityName=".GaleriaActivity"/>
+        <activity android:name=".ArmarioActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AgregarPrendaActivity"
+            android:parentActivityName=".ArmarioActivity"/>
+        <activity android:name=".TryOnActivity"
+            android:parentActivityName=".MainActivity"/>
 
     </application>
 

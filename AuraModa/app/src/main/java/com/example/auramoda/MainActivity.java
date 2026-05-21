@@ -7,13 +7,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView tvSaludo, tvUserAvatar, tvOutfitIA, tvNombrePerfil, tvAvatarPerfil;
-    LinearLayout cardIA, cardGaleria, cardFavoritos, cardPerfil, layoutEstilos;
-    TextView navHome, navGaleria, navChat, navPerfil;
+    LinearLayout cardIA, cardGaleria, cardArmario, cardTryOn, cardPerfil, layoutEstilos;
+    TextView navHome, navChat, navTryOn, navPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
         tvAvatarPerfil = findViewById(R.id.tvAvatarPerfil);
         cardIA = findViewById(R.id.cardIA);
         cardGaleria = findViewById(R.id.cardGaleria);
-        cardFavoritos = findViewById(R.id.cardFavoritos);
+        cardArmario = findViewById(R.id.cardArmario);
+        cardTryOn = findViewById(R.id.cardTryOn);
         cardPerfil = findViewById(R.id.cardPerfil);
         layoutEstilos = findViewById(R.id.layoutEstilos);
         navHome = findViewById(R.id.navHome);
-        navGaleria = findViewById(R.id.navGaleria);
         navChat = findViewById(R.id.navChat);
+        navTryOn = findViewById(R.id.navTryOn);
         navPerfil = findViewById(R.id.navPerfil);
 
         // Saludo según hora
@@ -80,29 +84,50 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Outfit del dia con Gemini
-        GeminiHelper.preguntar(
-                "Dame una recomendacion de outfit corta para hoy, considerando mis estilos favoritos: " + estilos,
-                nombre, estilos,
-                new GeminiHelper.GeminiCallback() {
-                    @Override
-                    public void onRespuesta(String respuesta) {
-                        tvOutfitIA.setText(respuesta);
-                    }
-                    @Override
-                    public void onError(String error) {
-                        tvOutfitIA.setText("Look casual: jeans + camisa basica + sneakers blancos.");
-                    }
-                });
+        // Outfit del dia
+        String fechaHoy = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String fechaGuardada = prefs.getString("outfit_fecha", "");
+        String outfitGuardado = prefs.getString("outfit_del_dia", "");
+
+        if (fechaHoy.equals(fechaGuardada) && !outfitGuardado.isEmpty()) {
+            tvOutfitIA.setText(outfitGuardado);
+        } else {
+            tvOutfitIA.setText("Generando outfit del día...");
+            GeminiHelper.preguntar(
+                    "Eres AuraModa, estilista experta. Dame el outfit del día para " + nombre + " considerando sus estilos favoritos: " + estilos + ". Formato exacto:\n✨ OUTFIT DEL DÍA\n[Nombre del look]\n\n👗 Prendas:\n• [prenda 1]\n• [prenda 2]\n• [prenda 3]\n\n👠 Zapatos: [opción]\n👜 Accesorio: [opción]\n\n💡 Tip: [consejo corto de estilo]\n\nSolo esto, sin saludos, max 8 líneas.",
+                    nombre, estilos,
+                    new GeminiHelper.GeminiCallback() {
+                        @Override
+                        public void onRespuesta(String respuesta) {
+                            tvOutfitIA.setText(respuesta);
+                            prefs.edit()
+                                    .putString("outfit_del_dia", respuesta)
+                                    .putString("outfit_fecha", fechaHoy)
+                                    .apply();
+                        }
+                        @Override
+                        public void onError(String error) {
+                            tvOutfitIA.setText("✨ OUTFIT DEL DÍA\nChic Casual Vibes\n\n👗 Prendas:\n• Blusa oversize beige\n• Mom jeans azul\n• Blazer crema\n\n👠 Zapatos: Mules nude\n👜 Accesorio: Bolso mini marrón\n\n💡 Tip: Metete la blusa por delante.");
+                        }
+                    });
+        }
 
         // Navegacion
         cardIA.setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
         findViewById(R.id.btnVerOutfit).setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
         cardGaleria.setOnClickListener(v -> startActivity(new Intent(this, GaleriaActivity.class)));
-        cardFavoritos.setOnClickListener(v -> startActivity(new Intent(this, FavoritosActivity.class)));
+        cardArmario.setOnClickListener(v -> startActivity(new Intent(this, ArmarioActivity.class)));
+        cardTryOn.setOnClickListener(v -> startActivity(new Intent(this, TryOnActivity.class)));
         cardPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
-        navGaleria.setOnClickListener(v -> startActivity(new Intent(this, GaleriaActivity.class)));
         navChat.setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
+        navTryOn.setOnClickListener(v -> startActivity(new Intent(this, TryOnActivity.class)));
         navPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
+
+        // Nav selected highlight
+        navHome.setBackgroundResource(R.drawable.bg_nav_selected);
+        navHome.setTextColor(Color.parseColor("#C9A547"));
+        navChat.setBackground(null);
+        navTryOn.setBackground(null);
+        navPerfil.setBackground(null);
     }
 }

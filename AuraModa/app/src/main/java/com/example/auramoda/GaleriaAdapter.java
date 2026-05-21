@@ -8,17 +8,16 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.example.auramoda.R;
 import java.util.List;
 
 public class GaleriaAdapter extends RecyclerView.Adapter<GaleriaAdapter.ViewHolder> {
 
-    Context context;
-    List<String> imageUrls;
-    OnItemClickListener listener;
+    private Context context;
+    private List<String> imageUrls;
+    private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onFavoritoClick(String url);
+        void onItemClick(String imageUrl);
     }
 
     public GaleriaAdapter(Context context, List<String> imageUrls, OnItemClickListener listener) {
@@ -37,8 +36,15 @@ public class GaleriaAdapter extends RecyclerView.Adapter<GaleriaAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String url = imageUrls.get(position);
-        Glide.with(context).load(url).into(holder.ivFoto);
-        holder.ivFavorito.setOnClickListener(v -> listener.onFavoritoClick(url));
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .placeholder(R.drawable.bg_avatar)
+                .into(holder.ivFoto);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onItemClick(url);
+        });
     }
 
     @Override
@@ -46,8 +52,15 @@ public class GaleriaAdapter extends RecyclerView.Adapter<GaleriaAdapter.ViewHold
         return imageUrls.size();
     }
 
+    public void actualizarLista(List<String> nuevasUrls) {
+        this.imageUrls = nuevasUrls;
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivFoto, ivFavorito;
+        ImageView ivFoto;
+        ImageView ivFavorito;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivFoto = itemView.findViewById(R.id.ivFoto);
