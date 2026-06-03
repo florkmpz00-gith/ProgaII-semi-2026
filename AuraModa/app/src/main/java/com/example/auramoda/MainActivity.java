@@ -43,20 +43,14 @@ public class MainActivity extends AppCompatActivity {
         navTryOn = findViewById(R.id.navTryOn);
         navPerfil = findViewById(R.id.navPerfil);
 
-        // Saludo según hora
         Calendar calendar = Calendar.getInstance();
         int hora = calendar.get(Calendar.HOUR_OF_DAY);
         String saludo;
-        if (hora >= 5 && hora < 12) {
-            saludo = "Buenos días";
-        } else if (hora >= 12 && hora < 18) {
-            saludo = "Buenas tardes";
-        } else {
-            saludo = "Buenas noches";
-        }
+        if (hora >= 5 && hora < 12) saludo = "Buenos días";
+        else if (hora >= 12 && hora < 18) saludo = "Buenas tardes";
+        else saludo = "Buenas noches";
         tvSaludo.setText(saludo + ", " + nombre + "!");
 
-        // Avatar
         if (!nombre.isEmpty()) {
             String inicial = String.valueOf(nombre.charAt(0)).toUpperCase();
             tvUserAvatar.setText(inicial);
@@ -64,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             tvNombrePerfil.setText(nombre);
         }
 
-        // Estilos chips
         if (!estilos.isEmpty()) {
             String[] arr = estilos.split(", ");
             for (String estilo : arr) {
@@ -84,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Outfit del dia
         String fechaHoy = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         String fechaGuardada = prefs.getString("outfit_fecha", "");
         String outfitGuardado = prefs.getString("outfit_del_dia", "");
@@ -112,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
 
-        // Navegacion
         cardIA.setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
         findViewById(R.id.btnVerOutfit).setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
         cardGaleria.setOnClickListener(v -> startActivity(new Intent(this, GaleriaActivity.class)));
@@ -122,12 +113,26 @@ public class MainActivity extends AppCompatActivity {
         navChat.setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
         navTryOn.setOnClickListener(v -> startActivity(new Intent(this, TryOnActivity.class)));
         navPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
+    }
 
-        // Nav selected highlight
-        navHome.setBackgroundResource(R.drawable.bg_nav_selected);
-        navHome.setTextColor(Color.parseColor("#C9A547"));
-        navChat.setBackground(null);
-        navTryOn.setBackground(null);
-        navPerfil.setBackground(null);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
+        String nombre = prefs.getString("user_name", "");
+        if (!nombre.isEmpty()) {
+            tvNombrePerfil.setText(nombre);
+            tvSaludo.setText(obtenerSaludo() + ", " + nombre + "!");
+            String inicial = String.valueOf(nombre.charAt(0)).toUpperCase();
+            tvUserAvatar.setText(inicial);
+            tvAvatarPerfil.setText(inicial);
+        }
+    }
+
+    String obtenerSaludo() {
+        int hora = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        if (hora >= 5 && hora < 12) return "Buenos días";
+        else if (hora >= 12 && hora < 18) return "Buenas tardes";
+        else return "Buenas noches";
     }
 }

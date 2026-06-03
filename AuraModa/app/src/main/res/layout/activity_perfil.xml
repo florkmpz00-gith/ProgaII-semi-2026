@@ -5,7 +5,6 @@
     android:background="@color/black_primary"
     android:orientation="vertical">
 
-    <!-- Nav -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -55,7 +54,6 @@
 
     </LinearLayout>
 
-    <!-- Header morado -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,7 +66,7 @@
             android:id="@+id/tvBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="atras"
+            android:text="←"
             android:textColor="@color/purple"
             android:textSize="16sp"
             android:layout_gravity="start"
@@ -102,7 +100,6 @@
 
     </LinearLayout>
 
-    <!-- Stats -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -166,7 +163,6 @@
 
     </LinearLayout>
 
-    <!-- Menu -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -177,6 +173,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/menuEditar"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_card_purple"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Editar perfil"
+                    android:textColor="@color/white_primary"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=">"
+                    android:textColor="@color/gray_muted"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/menuFavoritos"
@@ -192,7 +215,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Mis estilos favoritos"
+                    android:text="Mis favoritos"
                     android:textColor="@color/white_primary"
                     android:textSize="14sp"/>
 

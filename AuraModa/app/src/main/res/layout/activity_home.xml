@@ -105,7 +105,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Saludo -->
             <TextView
                 android:id="@+id/tvSaludo"
                 android:layout_width="wrap_content"
@@ -123,7 +122,6 @@
                 android:textSize="22sp"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Estilos -->
             <LinearLayout
                 android:id="@+id/layoutEstilos"
                 android:layout_width="match_parent"
@@ -131,7 +129,6 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Cards: Galeria + Armario -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -203,7 +200,6 @@
 
             </LinearLayout>
 
-            <!-- Try On card -->
             <LinearLayout
                 android:id="@+id/cardTryOn"
                 android:layout_width="match_parent"
@@ -247,7 +243,6 @@
 
             </LinearLayout>
 
-            <!-- Outfit del dia -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -297,7 +292,6 @@
 
             </LinearLayout>
 
-            <!-- Card perfil -->
             <LinearLayout
                 android:id="@+id/cardPerfil"
                 android:layout_width="match_parent"

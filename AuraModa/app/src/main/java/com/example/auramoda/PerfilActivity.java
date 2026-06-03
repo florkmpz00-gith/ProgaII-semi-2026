@@ -1,19 +1,23 @@
 package com.example.auramoda;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 public class PerfilActivity extends AppCompatActivity {
 
     TextView tvAvatar, tvNombre, tvFavCount, tvEdad, tvModoToggle;
-    LinearLayout layoutEstilos, menuFavoritos, menuHistorial, menuModo, menuCerrar;
+    LinearLayout layoutEstilos, menuEditar, menuFavoritos, menuHistorial, menuModo, menuCerrar;
     DatabaseHelper db;
     SharedPreferences prefs;
 
@@ -24,7 +28,6 @@ public class PerfilActivity extends AppCompatActivity {
 
         findViewById(R.id.tvBack).setOnClickListener(v -> finish());
 
-        // Nav
         findViewById(R.id.navHome).setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class));
             finish();
@@ -50,6 +53,7 @@ public class PerfilActivity extends AppCompatActivity {
         tvEdad = findViewById(R.id.tvEdad);
         tvModoToggle = findViewById(R.id.tvModoToggle);
         layoutEstilos = findViewById(R.id.layoutEstilos);
+        menuEditar = findViewById(R.id.menuEditar);
         menuFavoritos = findViewById(R.id.menuFavoritos);
         menuHistorial = findViewById(R.id.menuHistorial);
         menuModo = findViewById(R.id.menuModo);
@@ -89,6 +93,8 @@ public class PerfilActivity extends AppCompatActivity {
         tvModoToggle.setTextColor(modoOscuro ?
                 Color.parseColor("#C9A547") : Color.parseColor("#555555"));
 
+        menuEditar.setOnClickListener(v -> mostrarDialogEditar());
+
         menuModo.setOnClickListener(v -> {
             boolean oscuroActual = prefs.getBoolean("modo_oscuro", true);
             boolean nuevoModo = !oscuroActual;
@@ -114,5 +120,58 @@ public class PerfilActivity extends AppCompatActivity {
             startActivity(new Intent(this, SplashActivity.class));
             finishAffinity();
         });
+    }
+
+    void mostrarDialogEditar() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Editar perfil");
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(50, 20, 50, 20);
+
+        EditText etNombre = new EditText(this);
+        etNombre.setHint("Nombre");
+        etNombre.setText(prefs.getString("user_name", ""));
+        layout.addView(etNombre);
+
+        EditText etEdad = new EditText(this);
+        etEdad.setHint("Edad");
+        etEdad.setText(prefs.getString("user_edad", ""));
+        etEdad.setInputType(InputType.TYPE_CLASS_NUMBER);
+        layout.addView(etEdad);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Guardar", (dialog, which) -> {
+            String nombre = etNombre.getText().toString().trim();
+            String edad = etEdad.getText().toString().trim();
+            if (!nombre.isEmpty()) {
+                prefs.edit()
+                        .putString("user_name", nombre)
+                        .putString("user_edad", edad)
+                        .apply();
+                String email = prefs.getString("user_email", "");
+                db.actualizarPerfil(email, edad, prefs.getString("user_estilos", ""));
+                tvNombre.setText(nombre);
+                tvEdad.setText(edad);
+                tvAvatar.setText(String.valueOf(nombre.charAt(0)).toUpperCase());
+                Toast.makeText(this, "Perfil actualizado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", null);
+        builder.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String nombre = prefs.getString("user_name", "");
+        tvNombre.setText(nombre);
+        tvEdad.setText(prefs.getString("user_edad", "-"));
+        if (!nombre.isEmpty()) {
+            tvAvatar.setText(String.valueOf(nombre.charAt(0)).toUpperCase());
+        }
     }
 }

@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black_primary">#0D0D0D</color>
-    <color name="black_surface">#1A1A1A</color>
+
+    <color name="black_primary">#1C1410</color>
+    <color name="black_surface">#2A1F17</color>
+
     <color name="gold">#C9A547</color>
-    <color name="purple">#8B5CF6</color>
-    <color name="rose">#C97497</color>
-    <color name="white_primary">#F5F5F5</color>
-    <color name="gray_dark">#2A2A2A</color>
-    <color name="gray_muted">#555555</color>
-    <color name="light_bg">#F5F5F5</color>
-    <color name="light_surface">#FFFFFF</color>
-    <color name="light_purple_bg">#EDE8FF</color>
+
+    <color name="purple">#B8A4D4</color>
+
+    <color name="rose">#D4896A</color>
+
+    <color name="white_primary">#FAF6F1</color>
+    <color name="light_bg">#FAF6F1</color>
+    <color name="light_surface">#FFF8F2</color>
+
+    <color name="gray_dark">#3D2E24</color>
+    <color name="gray_muted">#7A6358</color>
+
+    <color name="light_purple_bg">#EDE0F5</color>
 </resources>
