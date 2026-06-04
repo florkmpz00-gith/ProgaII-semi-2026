@@ -14,9 +14,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tvSaludo, tvUserAvatar, tvOutfitIA, tvNombrePerfil, tvAvatarPerfil;
-    LinearLayout cardIA, cardGaleria, cardArmario, cardTryOn, cardPerfil, layoutEstilos;
-    TextView navHome, navChat, navTryOn, navPerfil;
+    TextView tvSaludo, tvUserAvatar, tvOutfitIA;
+    LinearLayout cardIA, cardGaleria, cardArmario, cardTryOn, layoutEstilos;
+    TextView navHome, navChat, navTryOn, navCompartir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +26,20 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
         String nombre = prefs.getString("user_name", "");
         String estilos = prefs.getString("user_estilos", "casual");
+        String genero = prefs.getString("user_genero", "femenino");
 
         tvSaludo = findViewById(R.id.tvSaludo);
         tvUserAvatar = findViewById(R.id.tvUserAvatar);
         tvOutfitIA = findViewById(R.id.tvOutfitIA);
-        tvNombrePerfil = findViewById(R.id.tvNombrePerfil);
-        tvAvatarPerfil = findViewById(R.id.tvAvatarPerfil);
         cardIA = findViewById(R.id.cardIA);
         cardGaleria = findViewById(R.id.cardGaleria);
         cardArmario = findViewById(R.id.cardArmario);
         cardTryOn = findViewById(R.id.cardTryOn);
-        cardPerfil = findViewById(R.id.cardPerfil);
         layoutEstilos = findViewById(R.id.layoutEstilos);
         navHome = findViewById(R.id.navHome);
         navChat = findViewById(R.id.navChat);
         navTryOn = findViewById(R.id.navTryOn);
-        navPerfil = findViewById(R.id.navPerfil);
+        navCompartir = findViewById(R.id.navPerfil);
 
         Calendar calendar = Calendar.getInstance();
         int hora = calendar.get(Calendar.HOUR_OF_DAY);
@@ -54,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         if (!nombre.isEmpty()) {
             String inicial = String.valueOf(nombre.charAt(0)).toUpperCase();
             tvUserAvatar.setText(inicial);
-            tvAvatarPerfil.setText(inicial);
-            tvNombrePerfil.setText(nombre);
         }
 
         if (!estilos.isEmpty()) {
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 if (estilo.trim().isEmpty()) continue;
                 TextView chip = new TextView(this);
                 chip.setText(estilo.trim());
-                chip.setTextColor(Color.parseColor("#8B5CF6"));
+                chip.setTextColor(Color.parseColor("#B8A4D4"));
                 chip.setTextSize(11);
                 chip.setPadding(24, 8, 24, 8);
                 chip.setBackgroundResource(R.drawable.bg_input);
@@ -85,9 +81,12 @@ public class MainActivity extends AppCompatActivity {
             tvOutfitIA.setText(outfitGuardado);
         } else {
             tvOutfitIA.setText("Generando outfit del día...");
+            String promptGenero = genero.equals("masculino")
+                    ? "para un hombre, sin ropa femenina"
+                    : "para una mujer";
             GeminiHelper.preguntar(
-                    "Eres AuraModa, estilista experta. Dame el outfit del día para " + nombre + " considerando sus estilos favoritos: " + estilos + ". Formato exacto:\n✨ OUTFIT DEL DÍA\n[Nombre del look]\n\n👗 Prendas:\n• [prenda 1]\n• [prenda 2]\n• [prenda 3]\n\n👠 Zapatos: [opción]\n👜 Accesorio: [opción]\n\n💡 Tip: [consejo corto de estilo]\n\nSolo esto, sin saludos, max 8 líneas.",
-                    nombre, estilos,
+                    "Eres AuraModa, estilista experta. Dame el outfit del día " + promptGenero + " llamado " + nombre + " con estilos favoritos: " + estilos + ". Formato exacto:\nOUTFIT DEL DÍA\n[Nombre del look]\n\nPrendas:\n• [prenda 1]\n• [prenda 2]\n• [prenda 3]\n\nZapatos: [opción]\nAccesorio: [opción]\n\nTip: [consejo corto]\n\nSin emojis, sin saludos, max 8 líneas.",
+                    nombre, estilos, genero,
                     new GeminiHelper.GeminiCallback() {
                         @Override
                         public void onRespuesta(String respuesta) {
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         @Override
                         public void onError(String error) {
-                            tvOutfitIA.setText("✨ OUTFIT DEL DÍA\nChic Casual Vibes\n\n👗 Prendas:\n• Blusa oversize beige\n• Mom jeans azul\n• Blazer crema\n\n👠 Zapatos: Mules nude\n👜 Accesorio: Bolso mini marrón\n\n💡 Tip: Metete la blusa por delante.");
+                            tvOutfitIA.setText("OUTFIT DEL DÍA\nChic Casual Vibes\n\nPrendas:\n• Blusa oversize beige\n• Mom jeans azul\n• Blazer crema\n\nZapatos: Mules nude\nAccesorio: Bolso mini marrón\n\nTip: Metete la blusa por delante.");
                         }
                     });
         }
@@ -109,10 +108,10 @@ public class MainActivity extends AppCompatActivity {
         cardGaleria.setOnClickListener(v -> startActivity(new Intent(this, GaleriaActivity.class)));
         cardArmario.setOnClickListener(v -> startActivity(new Intent(this, ArmarioActivity.class)));
         cardTryOn.setOnClickListener(v -> startActivity(new Intent(this, TryOnActivity.class)));
-        cardPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
+        tvUserAvatar.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
         navChat.setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
         navTryOn.setOnClickListener(v -> startActivity(new Intent(this, TryOnActivity.class)));
-        navPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
+        navCompartir.setOnClickListener(v -> startActivity(new Intent(this, CompartidosActivity.class)));
     }
 
     @Override
@@ -121,11 +120,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
         String nombre = prefs.getString("user_name", "");
         if (!nombre.isEmpty()) {
-            tvNombrePerfil.setText(nombre);
             tvSaludo.setText(obtenerSaludo() + ", " + nombre + "!");
             String inicial = String.valueOf(nombre.charAt(0)).toUpperCase();
             tvUserAvatar.setText(inicial);
-            tvAvatarPerfil.setText(inicial);
         }
     }
 

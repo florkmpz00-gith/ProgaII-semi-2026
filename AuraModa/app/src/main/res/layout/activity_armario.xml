@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:orientation="vertical">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -13,15 +12,16 @@
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/black_primary">
+        android:background="@color/light_bg">
 
         <TextView
             android:id="@+id/tvBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="←"
-            android:textColor="@color/white_primary"
-            android:textSize="22sp"
+            android:textColor="#1C1410"
+            android:textSize="32sp"
+            android:padding="4dp"
             android:layout_marginEnd="12dp"/>
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Mi Armario"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textSize="20sp"/>
 
         <TextView
@@ -37,12 +37,12 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:text="+ Agregar"
-            android:textColor="@color/white_primary"
+            android:textColor="#7B5EA7"
             android:textSize="12sp"
             android:gravity="center"
             android:paddingStart="14dp"
             android:paddingEnd="14dp"
-            android:background="@drawable/bg_btn_outline_white"/>
+            android:background="@drawable/bg_card_purple_light"/>
 
     </LinearLayout>
 
@@ -57,13 +57,12 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Sugerencia IA -->
             <LinearLayout
                 android:id="@+id/layoutSugerencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bg_card_purple"
+                android:background="@drawable/bg_card_purple_light"
                 android:padding="16dp"
                 android:layout_marginBottom="16dp"
                 android:visibility="gone">
@@ -72,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="COMBINACIONES DE ESTA SEMANA"
-                    android:textColor="#DDD6FE"
+                    android:textColor="#7B5EA7"
                     android:textSize="10sp"
                     android:letterSpacing="0.2"
                     android:layout_marginBottom="8dp"/>
@@ -87,13 +86,12 @@
                     android:id="@+id/tvSugerencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white_primary"
+                    android:textColor="#1C1410"
                     android:textSize="13sp"
                     android:lineSpacingExtra="4dp"/>
 
             </LinearLayout>
 
-            <!-- Empty state -->
             <LinearLayout
                 android:id="@+id/layoutEmpty"
                 android:layout_width="match_parent"
@@ -113,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tu armario está vacío"
-                    android:textColor="@color/white_primary"
+                    android:textColor="#1C1410"
                     android:textSize="16sp"
                     android:layout_marginBottom="8dp"/>
 
@@ -127,7 +125,6 @@
 
             </LinearLayout>
 
-            <!-- Lista prendas -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPrendas"
                 android:layout_width="match_parent"

@@ -5,7 +5,6 @@
     android:background="@color/light_bg"
     android:orientation="vertical">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -29,54 +28,48 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Estilista IA"
+            android:text="Outfits Recibidos"
             android:textColor="#1C1410"
-            android:textSize="16sp"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
-    <!-- Lista de mensajes -->
+    <ProgressBar
+        android:id="@+id/progressRecibidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvChat"
+        android:id="@+id/rvOutfitsRecibidos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="12dp"
-        android:clipToPadding="false"/>
+        android:padding="12dp"/>
 
-    <!-- Input -->
     <LinearLayout
+        android:id="@+id/layoutEmpty"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:background="#FFF8F2">
-
-        <EditText
-            android:id="@+id/etMensaje"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:hint="Pregunta algo..."
-            android:textColor="#1C1410"
-            android:textColorHint="@color/gray_muted"
-            android:textSize="13sp"
-            android:background="@drawable/bg_input"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:layout_marginEnd="8dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
-            android:id="@+id/btnEnviar"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:text="▶"
-            android:textColor="@color/white_primary"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:background="@drawable/bg_avatar"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👗"
+            android:textSize="48sp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No tienes outfits recibidos aún"
+            android:textColor="#1C1410"
+            android:textSize="16sp"/>
 
     </LinearLayout>
 

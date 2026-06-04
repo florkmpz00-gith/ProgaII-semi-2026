@@ -1,6 +1,7 @@
 package com.example.auramoda;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import org.json.JSONArray;
@@ -27,7 +29,11 @@ public class DetalleOutfitActivity extends AppCompatActivity {
     ImageView ivOutfit;
     LinearLayout layoutTiendas;
     ProgressBar progressTiendas;
-    TextView tvTituloEstilo;
+    TextView tvTituloEstilo, btnFavorito, btnFavoritoImagen, btnCompartir;
+    boolean esFavorito = false;
+    String imageUrlActual = "";
+    String estiloActual = "";
+    DatabaseHelper dbHelper;
 
     private static final String API_KEY = "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";
     private static final String URL_BASE = "https://api.groq.com/openai/v1/chat/completions";
@@ -43,14 +49,66 @@ public class DetalleOutfitActivity extends AppCompatActivity {
         layoutTiendas = findViewById(R.id.layoutTiendas);
         progressTiendas = findViewById(R.id.progressTiendas);
         tvTituloEstilo = findViewById(R.id.tvTituloEstilo);
+        btnFavorito = findViewById(R.id.btnFavorito);
+        btnFavoritoImagen = findViewById(R.id.btnFavoritoImagen);
+        btnCompartir = findViewById(R.id.btnCompartir);
 
-        String imageUrl = getIntent().getStringExtra("image_url");
-        String estilo = getIntent().getStringExtra("estilo");
+        imageUrlActual = getIntent().getStringExtra("image_url");
+        estiloActual = getIntent().getStringExtra("estilo");
 
-        Glide.with(this).load(imageUrl).into(ivOutfit);
-        tvTituloEstilo.setText("Estilo: " + estilo);
+        dbHelper = new DatabaseHelper(this);
 
-        buscarTiendas(estilo);
+        Glide.with(this).load(imageUrlActual).into(ivOutfit);
+        tvTituloEstilo.setText("Estilo: " + estiloActual);
+
+        // Verificar si ya es favorito
+        android.database.Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT id FROM favoritos WHERE url = ?", new String[]{imageUrlActual});
+        if (cursor.moveToFirst()) {
+            esFavorito = true;
+            btnFavorito.setText("❤️");
+            btnFavoritoImagen.setText("❤️");
+        }
+        cursor.close();
+
+        btnFavorito.setOnClickListener(v -> toggleFavorito());
+        btnFavoritoImagen.setOnClickListener(v -> toggleFavorito());
+
+        // Registrar usuario en CouchDB al entrar
+        SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
+        String nombre = prefs.getString("user_name", "");
+        String email = prefs.getString("user_email", "");
+        CouchDbHelper.registrarUsuario(nombre, email);
+
+        btnCompartir.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CompartirOutfitActivity.class);
+            intent.putExtra("image_url", imageUrlActual);
+            startActivity(intent);
+        });
+
+        buscarTiendas(estiloActual);
+    }
+
+    void toggleFavorito() {
+        if (esFavorito) {
+            android.database.Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
+                    "SELECT id FROM favoritos WHERE url = ?", new String[]{imageUrlActual});
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(0);
+                dbHelper.eliminarFavorito(id);
+            }
+            cursor.close();
+            esFavorito = false;
+            btnFavorito.setText("🤍");
+            btnFavoritoImagen.setText("🤍");
+            Toast.makeText(this, "Eliminado de favoritos", Toast.LENGTH_SHORT).show();
+        } else {
+            dbHelper.agregarFavorito(imageUrlActual, estiloActual);
+            esFavorito = true;
+            btnFavorito.setText("❤️");
+            btnFavoritoImagen.setText("❤️");
+            Toast.makeText(this, "¡Guardado en favoritos! ❤️", Toast.LENGTH_SHORT).show();
+        }
     }
 
     void buscarTiendas(String estilo) {
@@ -60,15 +118,17 @@ public class DetalleOutfitActivity extends AppCompatActivity {
 
         executor.execute(() -> {
             try {
+                String termino = estilo.replace(" ", "+").toLowerCase();
+
                 String prompt = "Eres un experto en moda. Para un outfit de estilo \"" + estilo + "\", " +
                         "recomienda exactamente 4 tiendas online con links de busqueda directa a prendas similares. " +
                         "Responde SOLO con JSON array sin texto extra ni markdown. " +
+                        "Usa el termino de busqueda \"" + termino + "\" adaptado para cada tienda. " +
                         "Formato exacto: " +
-                        "[{\"tienda\":\"SHEIN\",\"descripcion\":\"Vestidos casuales florales\",\"precio\":\"$8-$25\",\"url\":\"https://www.shein.com/search?q=casual+floral+dress\"}," +
-                        "{\"tienda\":\"Zara\",\"descripcion\":\"Tops y pantalones modernos\",\"precio\":\"$20-$60\",\"url\":\"https://www.zara.com/us/en/search?searchTerm=casual+top\"}," +
-                        "{\"tienda\":\"H&M\",\"descripcion\":\"Ropa casual asequible\",\"precio\":\"$10-$40\",\"url\":\"https://www2.hm.com/en_us/search-results.html?q=casual+outfit\"}," +
-                        "{\"tienda\":\"Forever21\",\"descripcion\":\"Moda juvenil tendencia\",\"precio\":\"$10-$35\",\"url\":\"https://www.forever21.com/us/search?q=casual+dress\"}]" +
-                        "Adapta los terminos de busqueda en las URLs al estilo especifico del outfit.";
+                        "[{\"tienda\":\"SHEIN\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$8-$25\",\"url\":\"https://www.shein.com/search?q=" + termino + "\"}," +
+                        "{\"tienda\":\"H&M\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$10-$40\",\"url\":\"https://www2.hm.com/en_us/search-results.html?q=" + termino + "\"}," +
+                        "{\"tienda\":\"Zara\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$20-$60\",\"url\":\"https://www.zara.com/us/en/search?searchTerm=" + termino + "\"}," +
+                        "{\"tienda\":\"Forever21\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$10-$35\",\"url\":\"https://www.forever21.com/us/search?q=" + termino + "\"}]";
 
                 JSONObject systemMsg = new JSONObject();
                 systemMsg.put("role", "system");
@@ -114,7 +174,6 @@ public class DetalleOutfitActivity extends AppCompatActivity {
                         .trim();
 
                 contenido = contenido.replace("```json", "").replace("```", "").trim();
-
                 JSONArray tiendas = new JSONArray(contenido);
 
                 handler.post(() -> {

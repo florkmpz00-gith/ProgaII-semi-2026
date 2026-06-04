@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:orientation="vertical">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -13,14 +12,14 @@
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/black_primary">
+        android:background="@color/light_bg">
 
         <TextView
             android:id="@+id/tvBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="←"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textSize="32sp"
             android:padding="4dp"
             android:layout_marginEnd="12dp"/>
@@ -29,14 +28,51 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mis Favoritos ❤️"
-            android:textColor="@color/white_primary"
+            android:text="Outfits Compartidos"
+            android:textColor="#1C1410"
             android:textSize="20sp"/>
 
     </LinearLayout>
 
+    <!-- Tabs -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:background="#FFF8F2">
+
+        <TextView
+            android:id="@+id/tabRecibidos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Recibidos"
+            android:textColor="@color/gold"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:background="@drawable/bg_nav_selected"/>
+
+        <TextView
+            android:id="@+id/tabEnviados"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Enviados"
+            android:textColor="@color/gray_muted"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressCompartidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFavoritos"
+        android:id="@+id/rvCompartidos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -54,24 +90,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🤍"
+            android:text="👗"
             android:textSize="48sp"
             android:layout_marginBottom="12dp"/>
 
         <TextView
+            android:id="@+id/tvEmptyMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aún no tienes favoritos"
-            android:textColor="@color/white_primary"
-            android:textSize="16sp"
-            android:layout_marginBottom="6dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Explora la galería y guarda tus outfits ❤️"
-            android:textColor="@color/gray_muted"
-            android:textSize="13sp"/>
+            android:text="No hay outfits recibidos aún"
+            android:textColor="#1C1410"
+            android:textSize="16sp"/>
 
     </LinearLayout>
 

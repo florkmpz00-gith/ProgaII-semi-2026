@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:fillViewport="true">
 
     <LinearLayout
@@ -43,7 +43,7 @@
             android:layout_height="48dp"
             android:hint="Correo electronico"
             android:inputType="textEmailAddress"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textColorHint="@color/gray_muted"
             android:background="@drawable/bg_input"
             android:paddingStart="16dp"
@@ -56,7 +56,7 @@
             android:layout_height="48dp"
             android:hint="Contrasena"
             android:inputType="textPassword"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textColorHint="@color/gray_muted"
             android:background="@drawable/bg_input_gold"
             android:paddingStart="16dp"
@@ -92,7 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="@color/gray_dark"/>
+                android:background="#E8DDD4"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="@color/gray_dark"/>
+                android:background="#E8DDD4"/>
 
         </LinearLayout>
 

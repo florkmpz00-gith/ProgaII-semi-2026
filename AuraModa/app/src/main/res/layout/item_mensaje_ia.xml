@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:maxWidth="250dp"
         android:text="Mensaje"
-        android:textColor="@color/white_primary"
+        android:textColor="#1C1410"
         android:textSize="13sp"
         android:background="@drawable/bg_bubble_ia"
         android:padding="10dp"/>

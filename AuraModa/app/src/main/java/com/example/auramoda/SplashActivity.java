@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
-        boolean modoOscuro = prefs.getBoolean("modo_oscuro", true);
+        boolean modoOscuro = prefs.getBoolean("modo_oscuro", false);
         AppCompatDelegate.setDefaultNightMode(
                 modoOscuro ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -30,7 +30,11 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
             String nombre = prefs.getString("user_name", "");
-            if (!nombre.isEmpty()) {
+            String email = prefs.getString("user_email", "");
+
+            if (!nombre.isEmpty() && !email.isEmpty()) {
+                // Registrar en CouchDB cada vez que abre la app
+                CouchDbHelper.registrarUsuario(nombre, email);
                 startActivity(new Intent(this, MainActivity.class));
             } else {
                 startActivity(new Intent(this, LoginActivity.class));

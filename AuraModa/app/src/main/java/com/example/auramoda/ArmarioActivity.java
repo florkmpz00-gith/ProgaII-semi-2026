@@ -27,6 +27,7 @@ public class ArmarioActivity extends AppCompatActivity {
     PrendasAdapter adapter;
     List<PrendaItem> prendas = new ArrayList<>();
     SharedPreferences prefs;
+    int cantidadPrendasAnterior = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,23 +80,31 @@ public class ArmarioActivity extends AppCompatActivity {
             rvPrendas.setVisibility(View.GONE);
             layoutEmpty.setVisibility(View.VISIBLE);
             layoutSugerencia.setVisibility(View.GONE);
+            cantidadPrendasAnterior = 0;
         } else {
             rvPrendas.setVisibility(View.VISIBLE);
             layoutEmpty.setVisibility(View.GONE);
             layoutSugerencia.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
+
+            // Regenerar sugerencia si cambió la cantidad de prendas
+            if (prendas.size() != cantidadPrendasAnterior) {
+                cantidadPrendasAnterior = prendas.size();
+                // Limpiar caché para forzar regeneración
+                prefs.edit()
+                        .remove("armario_sugerencia")
+                        .remove("armario_semana")
+                        .apply();
+            }
             generarSugerencia();
         }
     }
 
     void generarSugerencia() {
-        String fechaHoy = java.text.DateFormat.getDateInstance().format(new java.util.Date());
-        String semanaGuardada = prefs.getString("armario_semana", "");
-        String sugerenciaGuardada = prefs.getString("armario_sugerencia", "");
-
-        // Obtener numero de semana
         java.util.Calendar cal = java.util.Calendar.getInstance();
         String semanaActual = cal.get(java.util.Calendar.YEAR) + "-" + cal.get(java.util.Calendar.WEEK_OF_YEAR);
+        String semanaGuardada = prefs.getString("armario_semana", "");
+        String sugerenciaGuardada = prefs.getString("armario_sugerencia", "");
 
         if (semanaActual.equals(semanaGuardada) && !sugerenciaGuardada.isEmpty()) {
             tvSugerencia.setText(sugerenciaGuardada);
@@ -105,15 +114,28 @@ public class ArmarioActivity extends AppCompatActivity {
         progressSugerencia.setVisibility(View.VISIBLE);
         tvSugerencia.setVisibility(View.GONE);
 
-        String prendasTexto = db.getPrendasTexto();
+        // Construir texto de prendas con nombre, tipo Y color
+        StringBuilder prendasBuilder = new StringBuilder();
+        for (PrendaItem p : prendas) {
+            prendasBuilder.append(p.nombre)
+                    .append(" (")
+                    .append(p.tipo)
+                    .append(", color ")
+                    .append(p.color)
+                    .append("), ");
+        }
+        String prendasTexto = prendasBuilder.toString();
+
         String userName = prefs.getString("user_name", "");
         String userEstilos = prefs.getString("user_estilos", "casual");
+        String genero = prefs.getString("user_genero", "femenino");
 
         GeminiHelper.preguntar(
-                "Tengo estas prendas en mi armario: " + prendasTexto +
-                        " Dame 3 combinaciones de outfits diferentes y creativos usando solo estas prendas. " +
-                        "Formato: Outfit 1: [prendas], Outfit 2: [prendas], Outfit 3: [prendas]. Muy corto.",
-                userName, userEstilos,
+                "Tengo estas prendas en mi armario con sus colores exactos: " + prendasTexto +
+                        " Dame 3 combinaciones de outfits diferentes usando EXACTAMENTE los colores indicados. " +
+                        "Es muy importante que uses el color correcto de cada prenda. " +
+                        "Formato: Outfit 1: [prendas con color], Outfit 2: [prendas con color], Outfit 3: [prendas con color]. Muy corto.",
+                userName, userEstilos, genero,
                 new GeminiHelper.GeminiCallback() {
                     @Override
                     public void onRespuesta(String respuesta) {
@@ -154,10 +176,17 @@ public class ArmarioActivity extends AppCompatActivity {
                 db.eliminarPrenda(item.id);
                 prendas.remove(position);
                 notifyItemRemoved(position);
+                cantidadPrendasAnterior = prendas.size();
+                prefs.edit()
+                        .remove("armario_sugerencia")
+                        .remove("armario_semana")
+                        .apply();
                 if (prendas.isEmpty()) {
                     rvPrendas.setVisibility(View.GONE);
                     layoutEmpty.setVisibility(View.VISIBLE);
                     layoutSugerencia.setVisibility(View.GONE);
+                } else {
+                    generarSugerencia();
                 }
             });
         }

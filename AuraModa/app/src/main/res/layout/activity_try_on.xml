@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:orientation="vertical">
 
     <!-- Header -->
@@ -13,15 +13,16 @@
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/black_primary">
+        android:background="@color/light_bg">
 
         <TextView
             android:id="@+id/tvBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="←"
-            android:textColor="@color/white_primary"
-            android:textSize="22sp"
+            android:textColor="#1C1410"
+            android:textSize="32sp"
+            android:padding="4dp"
             android:layout_marginEnd="12dp"/>
 
         <TextView
@@ -29,58 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Virtual Try-On"
-            android:textColor="@color/white_primary"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-
-    <!-- Nav -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:background="#111111">
-
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Inicio"
-            android:textColor="@color/gray_muted"
-            android:textSize="11sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/navChat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Chat IA"
-            android:textColor="@color/gray_muted"
-            android:textSize="11sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/navTryOn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Try-On"
-            android:textColor="@color/gold"
-            android:textSize="11sp"
-            android:gravity="center"
-            android:background="@drawable/bg_nav_selected"/>
-
-        <TextView
-            android:id="@+id/navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:textColor="@color/gray_muted"
-            android:textSize="11sp"
-            android:gravity="center"/>
+            android:textColor="#1C1410"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
@@ -95,61 +47,112 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Descripción -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sube tu foto y describí el outfit que querés probar"
-                android:textColor="@color/gray_muted"
-                android:textSize="13sp"
-                android:layout_marginBottom="16dp"/>
+                android:orientation="vertical"
+                android:background="@drawable/bg_card_purple_light"
+                android:padding="16dp"
+                android:layout_marginBottom="14dp">
 
-            <ImageView
-                android:id="@+id/ivPersona"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✨ ¿Cómo funciona?"
+                    android:textColor="#7B5EA7"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sube tu foto, describe el outfit que quieres probar y la IA te dirá cómo te verías con ese look."
+                    android:textColor="@color/gray_muted"
+                    android:textSize="12sp"
+                    android:lineSpacingMultiplier="1.4"/>
+
+            </LinearLayout>
+
+            <!-- Foto -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/bg_input"
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_marginBottom="10dp"/>
-
-            <TextView
-                android:id="@+id/btnSubirPersona"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Subir mi foto"
-                android:textColor="@color/white_primary"
-                android:textSize="13sp"
-                android:gravity="center"
-                android:background="@drawable/bg_btn_outline_white"
-                android:layout_marginBottom="16dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Qué outfit querés probar?"
-                android:textColor="@color/white_primary"
-                android:textSize="14sp"
-                android:layout_marginBottom="8dp"/>
+                android:orientation="vertical"
+                android:background="@drawable/bg_card_light"
+                android:padding="16dp"
+                android:layout_marginBottom="14dp">
 
-            <EditText
-                android:id="@+id/etOutfit"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📷 Tu foto"
+                    android:textColor="@color/gold"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+
+                <ImageView
+                    android:id="@+id/ivPersona"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/bg_input"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/btnSubirPersona"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Seleccionar foto"
+                    android:textColor="#7B5EA7"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_purple_light"/>
+
+            </LinearLayout>
+
+            <!-- Outfit -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:hint="Ej: Vestido rojo floral con cinturón negro y sandalias beige"
-                android:textColor="@color/white_primary"
-                android:textColorHint="@color/gray_muted"
-                android:textSize="13sp"
-                android:background="@drawable/bg_input"
-                android:padding="12dp"
-                android:gravity="top"
-                android:inputType="textMultiLine"
-                android:layout_marginBottom="16dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card_light"
+                android:padding="16dp"
+                android:layout_marginBottom="14dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👗 Describe el outfit"
+                    android:textColor="@color/gold"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+
+                <EditText
+                    android:id="@+id/etOutfit"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:hint="Ej: Vestido rojo floral con cinturón negro y sandalias beige"
+                    android:textColor="#1C1410"
+                    android:textColorHint="@color/gray_muted"
+                    android:textSize="13sp"
+                    android:background="@drawable/bg_input"
+                    android:padding="12dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"/>
+
+            </LinearLayout>
+
+            <!-- Estado y loading -->
             <TextView
                 android:id="@+id/tvEstado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gold"
+                android:textColor="@color/purple"
                 android:textSize="13sp"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
@@ -164,23 +167,26 @@
                 android:visibility="gone"
                 android:layout_marginBottom="12dp"/>
 
+            <!-- Botón -->
             <TextView
                 android:id="@+id/btnProcesar"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Visualizar mi look con IA"
+                android:layout_height="52dp"
+                android:text="✨ Visualizar mi look con IA"
                 android:textColor="@color/white_primary"
-                android:textSize="14sp"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:background="@drawable/bg_avatar"
                 android:layout_marginBottom="16dp"/>
 
+            <!-- Resultado -->
             <LinearLayout
                 android:id="@+id/layoutResultado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bg_card_purple"
+                android:background="@drawable/bg_card_teal"
                 android:padding="16dp"
                 android:visibility="gone">
 
@@ -188,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ANÁLISIS DE TU LOOK"
-                    android:textColor="#DDD6FE"
+                    android:textColor="#5A9E8E"
                     android:textSize="10sp"
                     android:letterSpacing="0.2"
                     android:layout_marginBottom="8dp"/>
@@ -197,7 +203,7 @@
                     android:id="@+id/tvResultado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white_primary"
+                    android:textColor="#1C3530"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp"/>
 

@@ -1,6 +1,7 @@
 package com.example.auramoda;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,7 +24,6 @@ public class TryOnActivity extends AppCompatActivity {
     LinearLayout layoutResultado;
     ProgressBar progressTryOn;
     TextView tvResultado;
-
     Uri uriPersona = null;
 
     ActivityResultLauncher<Intent> imagePicker = registerForActivityResult(
@@ -43,19 +43,6 @@ public class TryOnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_try_on);
 
         findViewById(R.id.tvBack).setOnClickListener(v -> finish());
-        // Nav
-        findViewById(R.id.navHome).setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
-        findViewById(R.id.navChat).setOnClickListener(v -> {
-            startActivity(new Intent(this, ChatActivity.class));
-            finish();
-        });
-        findViewById(R.id.navPerfil).setOnClickListener(v -> {
-            startActivity(new Intent(this, PerfilActivity.class));
-            finish();
-        });
 
         ivPersona = findViewById(R.id.ivPersona);
         btnSubirFoto = findViewById(R.id.btnSubirPersona);
@@ -93,9 +80,10 @@ public class TryOnActivity extends AppCompatActivity {
         tvEstado.setVisibility(View.VISIBLE);
         layoutResultado.setVisibility(View.GONE);
 
-        android.content.SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
         String userName = prefs.getString("user_name", "");
         String userEstilos = prefs.getString("user_estilos", "casual");
+        String genero = prefs.getString("user_genero", "femenino");
 
         String prompt = "Eres un estilista experto de moda con mucha imaginación visual. " +
                 "El usuario se llama " + userName + " y sube una foto suya. " +
@@ -104,13 +92,13 @@ public class TryOnActivity extends AppCompatActivity {
                 "qué accesorios complementarían el look, y una puntuación del 1 al 10 de qué tan bien le quedaría. " +
                 "Sé específico, visual y entusiasta. Máximo 150 palabras.";
 
-        GeminiHelper.preguntar(prompt, userName, userEstilos, new GeminiHelper.GeminiCallback() {
+        GeminiHelper.preguntar(prompt, userName, userEstilos, genero, new GeminiHelper.GeminiCallback() {
             @Override
             public void onRespuesta(String respuesta) {
                 progressTryOn.setVisibility(View.GONE);
                 btnProcesar.setAlpha(1f);
                 btnProcesar.setEnabled(true);
-                tvEstado.setText("¡Así te verías con ese outfit! ✨");
+                tvEstado.setText("¡Así te verías con ese outfit!");
                 layoutResultado.setVisibility(View.VISIBLE);
                 tvResultado.setText(respuesta);
             }

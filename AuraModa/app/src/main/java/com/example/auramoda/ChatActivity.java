@@ -17,7 +17,7 @@ public class ChatActivity extends AppCompatActivity {
     TextView btnEnviar;
     ChatAdapter adapter;
     List<ChatMensaje> mensajes = new ArrayList<>();
-    String userName, userEstilos;
+    String userName, userEstilos, userGenero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class ChatActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("AuraModa", MODE_PRIVATE);
         userName = prefs.getString("user_name", "");
         userEstilos = prefs.getString("user_estilos", "casual");
+        userGenero = prefs.getString("user_genero", "femenino");
 
         rvChat = findViewById(R.id.rvChat);
         etMensaje = findViewById(R.id.etMensaje);
@@ -38,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
         rvChat.setLayoutManager(new LinearLayoutManager(this));
         rvChat.setAdapter(adapter);
 
-        agregarMensajeIA("¡Hola " + userName + "! Soy tu estilista personal. ¿Para qué ocasión necesitas un outfit hoy?");
+        agregarMensajeIA("Hola " + userName + "! Soy tu estilista personal. ¿Para qué ocasión necesitas un outfit hoy?");
 
         btnEnviar.setOnClickListener(v -> {
             String texto = etMensaje.getText().toString().trim();
@@ -50,20 +51,28 @@ public class ChatActivity extends AppCompatActivity {
             agregarMensajeIA("...");
             int posLoading = mensajes.size() - 1;
 
-            GeminiHelper.preguntar(texto, userName, userEstilos, new GeminiHelper.GeminiCallback() {
-                @Override
-                public void onRespuesta(String respuesta) {
-                    mensajes.set(posLoading, new ChatMensaje(respuesta, false));
-                    adapter.notifyItemChanged(posLoading);
-                    rvChat.scrollToPosition(mensajes.size() - 1);
-                }
+            List<ChatMensaje> historialParaEnviar = new ArrayList<>(mensajes.subList(0, posLoading));
 
-                @Override
-                public void onError(String error) {
-                    mensajes.set(posLoading, new ChatMensaje("Lo siento, hubo un error. Intenta de nuevo.", false));
-                    adapter.notifyItemChanged(posLoading);
-                }
-            });
+            GeminiHelper.preguntarConHistorial(
+                    historialParaEnviar,
+                    texto,
+                    userName,
+                    userEstilos,
+                    userGenero,
+                    new GeminiHelper.GeminiCallback() {
+                        @Override
+                        public void onRespuesta(String respuesta) {
+                            mensajes.set(posLoading, new ChatMensaje(respuesta, false));
+                            adapter.notifyItemChanged(posLoading);
+                            rvChat.scrollToPosition(mensajes.size() - 1);
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            mensajes.set(posLoading, new ChatMensaje("Lo siento, hubo un error. Intenta de nuevo.", false));
+                            adapter.notifyItemChanged(posLoading);
+                        }
+                    });
         });
     }
 

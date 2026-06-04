@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:orientation="vertical">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -13,15 +12,16 @@
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/black_primary">
+        android:background="@color/light_bg">
 
         <TextView
             android:id="@+id/tvBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="←"
-            android:textColor="@color/white_primary"
-            android:textSize="22sp"
+            android:textColor="#1C1410"
+            android:textSize="32sp"
+            android:padding="4dp"
             android:layout_marginEnd="12dp"/>
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Editar Perfil"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textSize="20sp"/>
 
     </LinearLayout>
@@ -72,12 +72,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:text="Galería"
-                        android:textColor="@color/white_primary"
+                        android:textColor="#7B5EA7"
                         android:textSize="12sp"
                         android:gravity="center"
                         android:paddingStart="14dp"
                         android:paddingEnd="14dp"
-                        android:background="@drawable/bg_btn_outline_white"
+                        android:background="@drawable/bg_card_purple_light"
                         android:layout_marginEnd="8dp"/>
 
                     <TextView
@@ -85,12 +85,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:text="Cámara"
-                        android:textColor="@color/white_primary"
+                        android:textColor="#7B5EA7"
                         android:textSize="12sp"
                         android:gravity="center"
                         android:paddingStart="14dp"
                         android:paddingEnd="14dp"
-                        android:background="@drawable/bg_btn_outline_white"/>
+                        android:background="@drawable/bg_card_purple_light"/>
 
                 </LinearLayout>
 
@@ -109,7 +109,7 @@
                 android:id="@+id/etNombre"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:textColor="@color/white_primary"
+                android:textColor="#1C1410"
                 android:textColorHint="@color/gray_muted"
                 android:textSize="14sp"
                 android:background="@drawable/bg_input"
@@ -130,14 +130,54 @@
                 android:id="@+id/etEdad"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:textColor="@color/white_primary"
+                android:textColor="#1C1410"
                 android:textColorHint="@color/gray_muted"
                 android:textSize="14sp"
                 android:background="@drawable/bg_input"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:inputType="number"
-                android:layout_marginBottom="24dp"/>
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Género -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Género"
+                android:textColor="@color/gray_muted"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/btnFemenino"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:text="♀ Femenino"
+                    android:textColor="#1C1410"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_input"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/btnMasculino"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:text="♂ Masculino"
+                    android:textColor="#1C1410"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_input"/>
+
+            </LinearLayout>
 
             <!-- Boton guardar -->
             <TextView

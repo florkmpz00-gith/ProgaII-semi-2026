@@ -47,6 +47,12 @@
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".EditarPerfilActivity"
             android:parentActivityName=".PerfilActivity"/>
+        <activity android:name=".CompartirOutfitActivity"
+            android:parentActivityName=".DetalleOutfitActivity"/>
+        <activity android:name=".OutfitsRecibidosActivity"
+            android:parentActivityName=".PerfilActivity"/>
+        <activity android:name=".CompartidosActivity"
+            android:parentActivityName=".MainActivity"/>
 
     </application>
 

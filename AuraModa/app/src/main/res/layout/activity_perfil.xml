@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        android:background="#111111">
+        android:background="#FFF8F2">
 
         <TextView
             android:id="@+id/navHome"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="#1A1A2E"
+        android:background="#F2E8DF"
         android:padding="24dp">
 
         <TextView
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:text="←"
             android:textColor="@color/purple"
-            android:textSize="16sp"
+            android:textSize="32sp"
             android:layout_gravity="start"
             android:layout_marginBottom="16dp"/>
 
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Flor"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textSize="18sp"
             android:layout_marginBottom="6dp"/>
 
@@ -104,7 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/black_surface">
+        android:background="@color/light_surface">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -134,7 +134,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/gray_dark"/>
+            android:background="#E8DDD4"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -180,7 +180,7 @@
                 android:layout_height="52dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@drawable/bg_card_purple"
+                android:background="@drawable/bg_card_purple_light"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp">
 
@@ -189,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Editar perfil"
-                    android:textColor="@color/white_primary"
+                    android:textColor="#7B5EA7"
                     android:textSize="14sp"/>
 
                 <TextView
@@ -207,7 +207,7 @@
                 android:layout_height="52dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@drawable/bg_card_gold"
+                android:background="@drawable/bg_card_light"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp">
 
@@ -216,14 +216,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Mis favoritos"
-                    android:textColor="@color/white_primary"
+                    android:textColor="#1C1410"
                     android:textSize="14sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="@color/gray_muted"
+                    android:textColor="@color/gold"
                     android:textSize="18sp"/>
 
             </LinearLayout>
@@ -234,7 +234,7 @@
                 android:layout_height="52dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@drawable/bg_card_gold"
+                android:background="@drawable/bg_card_light"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp">
 
@@ -243,14 +243,41 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Historial de outfits"
-                    android:textColor="@color/white_primary"
+                    android:textColor="#1C1410"
                     android:textSize="14sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="@color/gray_muted"
+                    android:textColor="@color/gold"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menuOutfitsRecibidos"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_card_teal"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Outfits recibidos"
+                    android:textColor="#1C3530"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=">"
+                    android:textColor="#5A9E8E"
                     android:textSize="18sp"/>
 
             </LinearLayout>
@@ -261,7 +288,7 @@
                 android:layout_height="52dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@drawable/bg_card_gold"
+                android:background="@drawable/bg_card_light"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp">
 
@@ -270,14 +297,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Modo oscuro"
-                    android:textColor="@color/white_primary"
+                    android:textColor="#1C1410"
                     android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/tvModoToggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ON"
+                    android:text="OFF"
                     android:textColor="@color/gold"
                     android:textSize="12sp"/>
 
@@ -289,7 +316,7 @@
                 android:layout_height="52dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="#1A0A0A"
+                android:background="#FDE8E8"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp">
 

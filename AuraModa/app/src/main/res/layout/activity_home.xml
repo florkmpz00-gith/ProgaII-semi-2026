@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="#FAF6F1"
     android:orientation="vertical">
 
-    <!-- Topbar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -13,11 +12,11 @@
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/black_primary">
+        android:background="#FAF6F1">
 
         <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/logo_auramoda"
             android:scaleType="fitCenter"
             android:layout_marginEnd="8dp"/>
@@ -33,22 +32,23 @@
 
         <TextView
             android:id="@+id/tvUserAvatar"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:text="F"
             android:textColor="@color/white_primary"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:gravity="center"
-            android:background="@drawable/bg_avatar"/>
+            android:background="@drawable/bg_avatar"
+            android:clickable="true"
+            android:focusable="true"/>
 
     </LinearLayout>
 
-    <!-- Nav arriba -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
         android:orientation="horizontal"
-        android:background="#111111">
+        android:background="#FFF8F2">
 
         <TextView
             android:id="@+id/navHome"
@@ -86,14 +86,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Perfil"
+            android:text="Compartir"
             android:textColor="@color/gray_muted"
             android:textSize="11sp"
             android:gravity="center"/>
 
     </LinearLayout>
 
-    <!-- Contenido scrollable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -109,7 +108,7 @@
                 android:id="@+id/tvSaludo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buenas noches, Flor!"
+                android:text="Buenas tardes, Flor!"
                 android:textColor="@color/gray_muted"
                 android:textSize="13sp"
                 android:layout_marginBottom="4dp"/>
@@ -118,83 +117,101 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inspirate, crea tu look"
-                android:textColor="@color/white_primary"
+                android:textColor="#1C1410"
                 android:textSize="22sp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:id="@+id/layoutEstilos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Explorar"
-                android:textColor="@color/white_primary"
-                android:textSize="16sp"
+                android:textColor="#1C1410"
+                android:textSize="15sp"
                 android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:id="@+id/cardGaleria"
                     android:layout_width="0dp"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/bg_card_gold"
-                    android:layout_marginEnd="8dp">
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:background="@drawable/bg_card_light"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <View
+                        android:layout_width="28dp"
+                        android:layout_height="3dp"
+                        android:background="@color/gold"
+                        android:layout_marginBottom="8dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Galería"
                         android:textColor="@color/gold"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="4dp"/>
+                        android:layout_marginBottom="3dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Outfits de moda"
                         android:textColor="@color/gray_muted"
-                        android:textSize="11sp"/>
+                        android:textSize="10sp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/cardArmario"
                     android:layout_width="0dp"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/bg_card_purple">
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:background="@drawable/bg_card_light"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <View
+                        android:layout_width="28dp"
+                        android:layout_height="3dp"
+                        android:background="@color/purple"
+                        android:layout_marginBottom="8dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mi Armario"
-                        android:textColor="#DDD6FE"
-                        android:textSize="14sp"
+                        android:textColor="@color/purple"
+                        android:textSize="13sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="4dp"/>
+                        android:layout_marginBottom="3dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Combinaciones IA"
                         android:textColor="@color/gray_muted"
-                        android:textSize="11sp"/>
+                        android:textSize="10sp"/>
 
                 </LinearLayout>
 
@@ -203,12 +220,14 @@
             <LinearLayout
                 android:id="@+id/cardTryOn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="76dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@drawable/bg_card_rose"
+                android:background="@drawable/bg_card_purple_light"
                 android:padding="16dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -220,10 +239,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Virtual Try-On"
-                        android:textColor="@color/purple"
-                        android:textSize="15sp"
+                        android:textColor="#7B5EA7"
+                        android:textSize="14sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="4dp"/>
+                        android:layout_marginBottom="3dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -238,8 +257,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="→"
-                    android:textColor="@color/purple"
-                    android:textSize="22sp"/>
+                    android:textColor="#9B85C4"
+                    android:textSize="28sp"/>
 
             </LinearLayout>
 
@@ -247,8 +266,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hoy te recomiendo"
-                android:textColor="@color/white_primary"
-                android:textSize="16sp"
+                android:textColor="#1C1410"
+                android:textSize="15sp"
                 android:layout_marginBottom="10dp"/>
 
             <LinearLayout
@@ -256,16 +275,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bg_card_purple"
-                android:padding="20dp"
-                android:layout_marginBottom="16dp">
+                android:background="@drawable/bg_card_teal"
+                android:padding="18dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OUTFIT DEL DIA"
-                    android:textColor="#DDD6FE"
-                    android:textSize="10sp"
+                    android:text="OUTFIT DEL DÍA"
+                    android:textColor="#5A9E8E"
+                    android:textSize="9sp"
                     android:letterSpacing="0.2"
                     android:layout_marginBottom="6dp"/>
 
@@ -274,8 +295,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cargando recomendacion..."
-                    android:textColor="@color/white_primary"
-                    android:textSize="14sp"
+                    android:textColor="#1C3530"
+                    android:textSize="13sp"
+                    android:lineSpacingMultiplier="1.5"
                     android:layout_marginBottom="12dp"/>
 
                 <TextView
@@ -283,58 +305,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:text="Chatear con IA"
-                    android:textColor="@color/white_primary"
-                    android:textSize="12sp"
+                    android:textColor="#5A9E8E"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:background="@drawable/bg_btn_outline_white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/cardPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/bg_card_gold"
-                android:padding="16dp"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:id="@+id/tvAvatarPerfil"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:text="F"
-                    android:textColor="@color/white_primary"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_avatar"
-                    android:layout_marginEnd="14dp"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvNombrePerfil"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Flor"
-                        android:textColor="@color/white_primary"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ver perfil"
-                        android:textColor="@color/gold"
-                        android:textSize="12sp"/>
-
-                </LinearLayout>
 
             </LinearLayout>
 

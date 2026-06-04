@@ -3,6 +3,7 @@ package com.example.auramoda;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,9 +20,10 @@ import java.io.InputStream;
 public class EditarPerfilActivity extends AppCompatActivity {
 
     EditText etNombre, etEdad;
-    TextView btnGuardar, btnFotoGaleria, btnFotoCamara;
+    TextView btnGuardar, btnFotoGaleria, btnFotoCamara, btnFemenino, btnMasculino;
     ImageView ivFotoPerfil;
     SharedPreferences prefs;
+    String generoSeleccionado = "femenino";
 
     ActivityResultLauncher<Intent> galeriaLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -56,9 +58,15 @@ public class EditarPerfilActivity extends AppCompatActivity {
         btnFotoGaleria = findViewById(R.id.btnFotoGaleria);
         btnFotoCamara = findViewById(R.id.btnFotoCamara);
         ivFotoPerfil = findViewById(R.id.ivFotoPerfil);
+        btnFemenino = findViewById(R.id.btnFemenino);
+        btnMasculino = findViewById(R.id.btnMasculino);
 
         etNombre.setText(prefs.getString("user_name", ""));
         etEdad.setText(prefs.getString("user_edad", ""));
+
+        // Cargar género guardado
+        generoSeleccionado = prefs.getString("user_genero", "femenino");
+        actualizarBotonesGenero();
 
         // Cargar foto si existe
         String fotoPath = prefs.getString("user_foto", "");
@@ -69,6 +77,16 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        btnFemenino.setOnClickListener(v -> {
+            generoSeleccionado = "femenino";
+            actualizarBotonesGenero();
+        });
+
+        btnMasculino.setOnClickListener(v -> {
+            generoSeleccionado = "masculino";
+            actualizarBotonesGenero();
+        });
 
         btnFotoGaleria.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -92,6 +110,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
             prefs.edit()
                     .putString("user_name", nombre)
                     .putString("user_edad", edad)
+                    .putString("user_genero", generoSeleccionado)
                     .apply();
 
             String email = prefs.getString("user_email", "");
@@ -101,6 +120,20 @@ public class EditarPerfilActivity extends AppCompatActivity {
             Toast.makeText(this, "Perfil actualizado!", Toast.LENGTH_SHORT).show();
             finish();
         });
+    }
+
+    void actualizarBotonesGenero() {
+        if (generoSeleccionado.equals("femenino")) {
+            btnFemenino.setBackgroundResource(R.drawable.bg_chip_active);
+            btnFemenino.setTextColor(Color.parseColor("#1C1410"));
+            btnMasculino.setBackgroundResource(R.drawable.bg_input);
+            btnMasculino.setTextColor(Color.parseColor("#7A6358"));
+        } else {
+            btnMasculino.setBackgroundResource(R.drawable.bg_chip_active);
+            btnMasculino.setTextColor(Color.parseColor("#1C1410"));
+            btnFemenino.setBackgroundResource(R.drawable.bg_input);
+            btnFemenino.setTextColor(Color.parseColor("#7A6358"));
+        }
     }
 
     void guardarFoto(Uri uri) {

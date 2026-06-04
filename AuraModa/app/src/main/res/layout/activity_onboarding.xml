@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:orientation="vertical"
     android:padding="32dp">
 
-    <!-- Progress dots -->
     <LinearLayout
         android:id="@+id/layoutDots"
         android:layout_width="wrap_content"
@@ -28,39 +27,41 @@
             android:id="@+id/dot2"
             android:layout_width="8dp"
             android:layout_height="4dp"
-            android:background="@color/gray_dark"
+            android:background="#E8DDD4"
             android:layout_marginEnd="6dp"/>
 
         <View
             android:id="@+id/dot3"
             android:layout_width="8dp"
             android:layout_height="4dp"
-            android:background="@color/gray_dark"/>
+            android:background="#E8DDD4"/>
 
     </LinearLayout>
 
-    <!-- Icono -->
-    <ImageView
+    <TextView
         android:id="@+id/ivOnboardingIcon"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_logo_aurora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AuraModa"
+        android:textColor="@color/gold"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginBottom="20dp"/>
 
-    <!-- Titulo -->
     <TextView
         android:id="@+id/tvOnboardingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¡Hola! ¿Cómo te llamas?"
-        android:textColor="@color/white_primary"
+        android:textColor="#1C1410"
         android:textSize="22sp"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:layout_marginBottom="8dp"/>
 
-    <!-- Subtitulo -->
     <TextView
         android:id="@+id/tvOnboardingSubtitle"
         android:layout_width="wrap_content"
@@ -72,13 +73,12 @@
         android:gravity="center"
         android:layout_marginBottom="40dp"/>
 
-    <!-- Input nombre paso 1 -->
     <EditText
         android:id="@+id/etOnboardingInput"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:hint="Tu nombre..."
-        android:textColor="@color/white_primary"
+        android:textColor="#1C1410"
         android:textColorHint="@color/gray_muted"
         android:background="@drawable/bg_input_gold"
         android:paddingStart="16dp"
@@ -86,7 +86,6 @@
         android:layout_marginBottom="16dp"
         android:inputType="textPersonName"/>
 
-    <!-- Chips edad paso 2 -->
     <LinearLayout
         android:id="@+id/layoutEdad"
         android:layout_width="match_parent"
@@ -145,7 +144,6 @@
 
     </LinearLayout>
 
-    <!-- Chips estilo paso 3 -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupEstilo"
         android:layout_width="match_parent"
@@ -203,7 +201,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- Boton continuar -->
     <Button
         android:id="@+id/btnContinuar"
         android:layout_width="match_parent"

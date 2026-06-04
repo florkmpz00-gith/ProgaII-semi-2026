@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="@color/light_bg"
     android:fillViewport="true">
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Crear cuenta"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textSize="24sp"
             android:layout_marginBottom="4dp"/>
 
@@ -45,7 +45,7 @@
             android:layout_height="48dp"
             android:hint="Nombre completo"
             android:inputType="textPersonName"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textColorHint="@color/gray_muted"
             android:background="@drawable/bg_input"
             android:paddingStart="16dp"
@@ -58,7 +58,7 @@
             android:layout_height="48dp"
             android:hint="Correo electrónico"
             android:inputType="textEmailAddress"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textColorHint="@color/gray_muted"
             android:background="@drawable/bg_input"
             android:paddingStart="16dp"
@@ -71,7 +71,7 @@
             android:layout_height="48dp"
             android:hint="Contraseña"
             android:inputType="textPassword"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textColorHint="@color/gray_muted"
             android:background="@drawable/bg_input"
             android:paddingStart="16dp"
@@ -84,7 +84,7 @@
             android:layout_height="48dp"
             android:hint="Confirmar contraseña"
             android:inputType="textPassword"
-            android:textColor="@color/white_primary"
+            android:textColor="#1C1410"
             android:textColorHint="@color/gray_muted"
             android:background="@drawable/bg_input_gold"
             android:paddingStart="16dp"

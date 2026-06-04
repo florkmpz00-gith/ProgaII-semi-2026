@@ -1,23 +1,20 @@
 package com.example.auramoda;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.InputType;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 public class PerfilActivity extends AppCompatActivity {
 
     TextView tvAvatar, tvNombre, tvFavCount, tvEdad, tvModoToggle;
-    LinearLayout layoutEstilos, menuEditar, menuFavoritos, menuHistorial, menuModo, menuCerrar;
+    LinearLayout layoutEstilos, menuEditar, menuFavoritos, menuHistorial,
+            menuModo, menuCerrar, menuOutfitsRecibidos;
     DatabaseHelper db;
     SharedPreferences prefs;
 
@@ -58,6 +55,7 @@ public class PerfilActivity extends AppCompatActivity {
         menuHistorial = findViewById(R.id.menuHistorial);
         menuModo = findViewById(R.id.menuModo);
         menuCerrar = findViewById(R.id.menuCerrar);
+        menuOutfitsRecibidos = findViewById(R.id.menuOutfitsRecibidos);
 
         if (!nombre.isEmpty()) {
             tvAvatar.setText(String.valueOf(nombre.charAt(0)).toUpperCase());
@@ -88,15 +86,16 @@ public class PerfilActivity extends AppCompatActivity {
             }
         }
 
-        boolean modoOscuro = prefs.getBoolean("modo_oscuro", true);
+        boolean modoOscuro = prefs.getBoolean("modo_oscuro", false);
         tvModoToggle.setText(modoOscuro ? "ON" : "OFF");
         tvModoToggle.setTextColor(modoOscuro ?
                 Color.parseColor("#C9A547") : Color.parseColor("#555555"));
 
-        menuEditar.setOnClickListener(v -> mostrarDialogEditar());
+        menuEditar.setOnClickListener(v ->
+                startActivity(new Intent(this, EditarPerfilActivity.class)));
 
         menuModo.setOnClickListener(v -> {
-            boolean oscuroActual = prefs.getBoolean("modo_oscuro", true);
+            boolean oscuroActual = prefs.getBoolean("modo_oscuro", false);
             boolean nuevoModo = !oscuroActual;
             prefs.edit().putBoolean("modo_oscuro", nuevoModo).apply();
             tvModoToggle.setText(nuevoModo ? "ON" : "OFF");
@@ -112,6 +111,9 @@ public class PerfilActivity extends AppCompatActivity {
         menuHistorial.setOnClickListener(v ->
                 startActivity(new Intent(this, FavoritosActivity.class)));
 
+        menuOutfitsRecibidos.setOnClickListener(v ->
+                startActivity(new Intent(this, OutfitsRecibidosActivity.class)));
+
         menuCerrar.setOnClickListener(v -> {
             prefs.edit()
                     .remove("user_name")
@@ -120,48 +122,6 @@ public class PerfilActivity extends AppCompatActivity {
             startActivity(new Intent(this, SplashActivity.class));
             finishAffinity();
         });
-    }
-
-    void mostrarDialogEditar() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Editar perfil");
-
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(50, 20, 50, 20);
-
-        EditText etNombre = new EditText(this);
-        etNombre.setHint("Nombre");
-        etNombre.setText(prefs.getString("user_name", ""));
-        layout.addView(etNombre);
-
-        EditText etEdad = new EditText(this);
-        etEdad.setHint("Edad");
-        etEdad.setText(prefs.getString("user_edad", ""));
-        etEdad.setInputType(InputType.TYPE_CLASS_NUMBER);
-        layout.addView(etEdad);
-
-        builder.setView(layout);
-
-        builder.setPositiveButton("Guardar", (dialog, which) -> {
-            String nombre = etNombre.getText().toString().trim();
-            String edad = etEdad.getText().toString().trim();
-            if (!nombre.isEmpty()) {
-                prefs.edit()
-                        .putString("user_name", nombre)
-                        .putString("user_edad", edad)
-                        .apply();
-                String email = prefs.getString("user_email", "");
-                db.actualizarPerfil(email, edad, prefs.getString("user_estilos", ""));
-                tvNombre.setText(nombre);
-                tvEdad.setText(edad);
-                tvAvatar.setText(String.valueOf(nombre.charAt(0)).toUpperCase());
-                Toast.makeText(this, "Perfil actualizado!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        builder.setNegativeButton("Cancelar", null);
-        builder.show();
     }
 
     @Override
