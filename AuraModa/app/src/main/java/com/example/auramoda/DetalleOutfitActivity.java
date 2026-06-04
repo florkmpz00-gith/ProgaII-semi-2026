@@ -125,8 +125,6 @@ public class DetalleOutfitActivity extends AppCompatActivity {
                         "Responde SOLO con JSON array sin texto extra ni markdown. " +
                         "Usa el termino de busqueda \"" + termino + "\" adaptado para cada tienda. " +
                         "Formato exacto: " +
-                        "[{\"tienda\":\"SHEIN\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$8-$25\",\"url\":\"https://www.shein.com/search?q=" + termino + "\"}," +
-                        "{\"tienda\":\"H&M\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$10-$40\",\"url\":\"https://www2.hm.com/en_us/search-results.html?q=" + termino + "\"}," +
                         "{\"tienda\":\"Zara\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$20-$60\",\"url\":\"https://www.zara.com/us/en/search?searchTerm=" + termino + "\"}," +
                         "{\"tienda\":\"Forever21\",\"descripcion\":\"Descripcion corta\",\"precio\":\"$10-$35\",\"url\":\"https://www.forever21.com/us/search?q=" + termino + "\"}]";
 

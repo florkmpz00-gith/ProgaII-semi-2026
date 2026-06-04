@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 public class CouchDbHelper {
 
-    private static final String BASE_URL = "http://10.0.2.2:5984";
+    private static final String BASE_URL = "http://192.168.82.149:5984";
     private static final String USER = "Flor11";
     private static final String PASS = "123456";
     private static final String DB_OUTFITS = "outfits_compartidos";
@@ -84,6 +84,9 @@ public class CouchDbHelper {
                     osCreate.write(doc.toString().getBytes("UTF-8"));
                     osCreate.close();
                     connCreate.getInputStream().close();
+                    android.util.Log.d("CouchDb", "Usuario registrado: " + nombre);
+                } else {
+                    android.util.Log.d("CouchDb", "Usuario ya existe: " + nombre);
                 }
             } catch (Exception e) {
                 android.util.Log.e("CouchDb", "Error registrando usuario: " + e.getMessage());
@@ -97,22 +100,15 @@ public class CouchDbHelper {
 
         executor.execute(() -> {
             try {
-                URL url = new URL(BASE_URL + "/" + DB_USUARIOS + "/_find");
+                // Obtener TODOS los docs de la base sin filtrar por tipo
+                URL url = new URL(BASE_URL + "/" + DB_USUARIOS + "/_all_docs?include_docs=true");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod("GET");
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setRequestProperty("Authorization", getAuth());
-                conn.setDoOutput(true);
 
-                JSONObject query = new JSONObject();
-                JSONObject selector = new JSONObject();
-                selector.put("tipo", "usuario");
-                query.put("selector", selector);
-                query.put("limit", 50);
-
-                OutputStream os = conn.getOutputStream();
-                os.write(query.toString().getBytes("UTF-8"));
-                os.close();
+                int code = conn.getResponseCode();
+                android.util.Log.d("CouchDb", "getUsuarios response code: " + code);
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder response = new StringBuilder();
@@ -120,20 +116,28 @@ public class CouchDbHelper {
                 while ((line = reader.readLine()) != null) response.append(line);
                 reader.close();
 
+                android.util.Log.d("CouchDb", "getUsuarios response: " + response.toString());
+
                 JSONObject result = new JSONObject(response.toString());
-                JSONArray docs = result.getJSONArray("docs");
+                JSONArray rows = result.getJSONArray("rows");
 
                 List<JSONObject> usuarios = new ArrayList<>();
-                for (int i = 0; i < docs.length(); i++) {
-                    JSONObject doc = docs.getJSONObject(i);
+                for (int i = 0; i < rows.length(); i++) {
+                    JSONObject doc = rows.getJSONObject(i).optJSONObject("doc");
+                    if (doc == null) continue;
+                    // Saltar diseño de documentos
+                    if (doc.optString("_id").startsWith("_design")) continue;
+                    // Excluir al usuario actual
                     if (!doc.optString("email").equals(miEmail)) {
                         usuarios.add(doc);
                     }
                 }
 
+                android.util.Log.d("CouchDb", "Usuarios encontrados: " + usuarios.size());
                 handler.post(() -> callback.onSuccess(usuarios));
 
             } catch (Exception e) {
+                android.util.Log.e("CouchDb", "Error getUsuarios: " + e.getMessage());
                 handler.post(() -> callback.onError(e.getMessage()));
             }
         });

@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvSaludo, tvUserAvatar, tvOutfitIA;
     LinearLayout cardIA, cardGaleria, cardArmario, cardTryOn, layoutEstilos;
-    TextView navHome, navChat, navTryOn, navCompartir;
+    TextView navHome, navChat, navTryOn, navPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         navHome = findViewById(R.id.navHome);
         navChat = findViewById(R.id.navChat);
         navTryOn = findViewById(R.id.navTryOn);
-        navCompartir = findViewById(R.id.navPerfil);
+        navPerfil = findViewById(R.id.navPerfil);
 
         Calendar calendar = Calendar.getInstance();
         int hora = calendar.get(Calendar.HOUR_OF_DAY);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         tvUserAvatar.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
         navChat.setOnClickListener(v -> startActivity(new Intent(this, ChatActivity.class)));
         navTryOn.setOnClickListener(v -> startActivity(new Intent(this, TryOnActivity.class)));
-        navCompartir.setOnClickListener(v -> startActivity(new Intent(this, CompartidosActivity.class)));
+        navPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
     }
 
     @Override
